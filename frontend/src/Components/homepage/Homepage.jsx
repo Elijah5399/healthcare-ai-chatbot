@@ -1,5 +1,4 @@
-import "./Homepage.css";
-import MyNavBar from "../MyNavBar/MyNavBar";
+import MyNavBar from "../mynavbar/MyNavBar";
 
 export default function Homepage() {
   return (
