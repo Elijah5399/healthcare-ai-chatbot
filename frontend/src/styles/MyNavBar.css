@@ -9,3 +9,8 @@
     font-size: large;
     padding-left: 5em;
 }
+
+.options {
+    padding-right: 125px !important;
+    display: inline-block;
+}
