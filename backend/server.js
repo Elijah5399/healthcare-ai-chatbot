@@ -1,11 +1,13 @@
 const express = require("express");
+require("dotenv").config();
+const { WebhookClient } = require("dialogflow-fulfillment");
 
 /* Creating Express App */
 const expressApp = express();
 
 /* Reacting to Requests */
-expressApp.length("/", (request, response) => {
-  response.json({ msg: "Welcome to the app" });
+expressApp.get("/", (req, res) => {
+  res.send("Hi from server!");
 });
 
 /* Listen for Requests */
