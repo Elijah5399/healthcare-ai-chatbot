@@ -1,18 +1,39 @@
 import ChatbotLogo from ".././chatbot-logo.png";
 import userImage from ".././user-image.png";
+import { useState } from "react";
 
 export default function Chatbot() {
   {
     /* Main Container */
   }
+  /* messages is an array of JSON objects. */
+  const [messages, setMessages] = useState([
+    { status: "received", content: "Hello Elijah" },
+    { status: "sent", content: "Hello World!" },
+  ]);
+  const [input, setInput] = useState("");
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      //TODO: Enter a query to the dialogflow API with the value of input
+
+      //add a new outgoing message to the chatbox
+      setMessages([...messages, { status: "sent", content: input }]);
+      //console.log("input is: " + input);
+      setInput("");
+    }
+  };
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  };
+  var shownMessages;
   return (
     <div className="chatbotContainer">
       {/* Message Header Section */}
       <div className="msg-header">
-        <div class="container1">
-          <img src={ChatbotLogo} class="msgimg" />
-          <div class="active">
-            <p class="chatbotText">ChatBot @ SGH</p>
+        <div className="container1">
+          <img src={ChatbotLogo} className="msgimg" />
+          <div className="active">
+            <p className="chatbotText">ChatBot @ SGH</p>
           </div>
         </div>
       </div>
@@ -22,64 +43,39 @@ export default function Chatbot() {
           <div className="chats">
             <div className="msg-page">
               {/* Contains Incoming & Outgoing Messages */}
-              <div class="received-chats">
-                <img class="received-chats-img" src={ChatbotLogo} />
-                <div class="received-msg">
-                  <div class="received-msg-inbox">
-                    <p>
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                    </p>
+              {messages.map((message) => {
+                return message.status === "received" ? (
+                  <div className="received-chats">
+                    <img className="received-chats-img" src={ChatbotLogo} />
+                    <div className="received-msg">
+                      <div className="received-msg-inbox">
+                        <p>{message.content}</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              <div class="outgoing-chats">
-                <div class="outgoing-msg">
-                  <div class="outgoing-chats-msg">
-                    <p>
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                      Elijah Elijah Elijah Elijah Elijah Elijah Elijah Elijah
-                    </p>
+                ) : (
+                  <div className="outgoing-chats">
+                    <div className="outgoing-msg">
+                      <div className="outgoing-chats-msg">
+                        <p>{message.content}</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+                );
+              })}
             </div>
           </div>
 
           {/* Message Bottom Section */}
           <div className="msg-bottom">
-            <div class="input-group">
+            <div className="input-group">
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="Ask Me Anything!"
+                value={input}
+                onKeyDown={handleKeyDown}
+                onChange={handleChange}
               />
             </div>
           </div>
