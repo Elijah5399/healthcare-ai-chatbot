@@ -1,6 +1,7 @@
 import ChatbotLogo from ".././chatbot-logo.png";
 import userImage from ".././user-image.png";
 import { useState } from "react";
+import userIcon from ".././profileIcon2.jpeg";
 
 export default function Chatbot() {
   {
@@ -60,6 +61,7 @@ export default function Chatbot() {
                         <p>{message.content}</p>
                       </div>
                     </div>
+                    <img className="outgoing-chats-img" src={userIcon} />
                   </div>
                 );
               })}
