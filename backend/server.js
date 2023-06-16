@@ -1,5 +1,6 @@
 const express = require("express");
 require("dotenv").config();
+const executeQueries = require("./dialogflow");
 
 /* Creating Express App */
 const expressApp = express();
@@ -7,15 +8,28 @@ const expressApp = express();
 /* Middleware (???) */
 expressApp.use(express.json());
 
+expressApp.use(express.static("../frontend/index.js"));
+/*
 expressApp.use((request, response, next) => {
   console.log(request.path, request.method);
   next();
 });
+*/
 
 /* Reacting to Requests */
+
 expressApp.get("/", (request, response) => {
   // request
-  response.json({ msg: "Welcome to the app" });
+  response.send("hello");
+});
+
+expressApp.get("/askQn", (req, res) => {
+  executeQueries(
+    process.env.PROJECT_ID,
+    123456,
+    ["what time are you open?"],
+    "en"
+  ).then((ans) => res.send(ans));
 });
 
 /* Listen for Requests */
