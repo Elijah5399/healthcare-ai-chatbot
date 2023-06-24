@@ -29,7 +29,7 @@ expressApp.get("/askQn", (req, res) => {
     123456,
     ["what time are you open?"],
     "en"
-  ).then((ans) => res.send(ans));
+  ).then((ans) => console.log("API hit"));
 });
 
 /* Listen for Requests */
