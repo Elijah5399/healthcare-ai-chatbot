@@ -2,6 +2,7 @@ import ChatbotLogo from ".././chatbot-logo.png";
 import userImage from ".././user-image.png";
 import { useState } from "react";
 import userIcon from ".././profileIcon2.jpeg";
+import axios from "axios";
 
 export default function Chatbot() {
   {
@@ -16,7 +17,7 @@ export default function Chatbot() {
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       //TODO: Enter a query to the dialogflow API with the value of input
-
+      axios.get("/askQn");
       //add a new outgoing message to the chatbox
       setMessages([...messages, { status: "sent", content: input }]);
       //console.log("input is: " + input);

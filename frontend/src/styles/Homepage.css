@@ -92,8 +92,8 @@ img.msgimg {
   margin-top: 13px;
   margin-right: 20px;
   outline: none !important;
-  border-radius: 20px;
   width: 61% !important;
+  border-radius: 20px;
   background-color: #fff;
   position: relative;
   display: flex;
