@@ -5,12 +5,21 @@
     margin-left: -18em;
 }
 
+.container {
+    justify-content: start !important;
+}
+
+.navbarWrapper {
+    display: flex;
+    margin-left: 5em;
+}
+
 .me-auto{
     font-size: large;
     padding-left: 5em;
 }
 
 .options {
-    padding-right: 125px !important;
+    padding-right: 100px !important;
     display: inline-block;
 }
