@@ -8,38 +8,43 @@ import "../../styles/MyNavBar.css";
 function MyNavBar() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
+      {/*
       <a href="/">
         <img className="sghlogo" src={SGHLogo} />
-      </a>
+  </a> */}
       <Container className="container">
-        <div className="navbarWrapper">
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link
-                href="/book"
-                className="options"
-                style={{ width: "300px" }}
-              >
-                Book an Appointment
-              </Nav.Link>
-              <Nav.Link
-                href="/cancel"
-                className="options"
-                style={{ width: "320px" }}
-              >
-                Cancel an Appointment
-              </Nav.Link>
-              <Nav.Link
-                href="/contact"
-                className="options"
-                style={{ width: "250px" }}
-              >
-                Contact Us
-              </Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </div>
+        <Navbar.Brand as="a" href="/">
+          <img className="sghlogo" src={SGHLogo} />
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link
+              href="/book"
+              className="options"
+              style={{ width: "300px" }}
+            >
+              Book an Appointment
+            </Nav.Link>
+            <Nav.Link
+              href="/cancel"
+              className="options"
+              style={{ width: "320px" }}
+            >
+              Cancel an Appointment
+            </Nav.Link>
+            <Nav.Link
+              href="/contact"
+              className="options"
+              style={{ width: "250px" }}
+            >
+              Contact Us
+            </Nav.Link>
+          </Nav>
+          <Nav.Link href="#" className="options">
+            Login
+          </Nav.Link>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
