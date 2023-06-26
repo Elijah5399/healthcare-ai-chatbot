@@ -206,3 +206,17 @@ p {
   float: right;
   width: 60%;
 }
+
+.bannerContainer {
+  width: 100vw;
+  height: 450px;
+  margin: auto;
+  overflow: hidden;
+}
+.each-slide {
+  height: 450px;
+}
+.slide-container {
+  width: 70%;
+  margin: auto;
+}
