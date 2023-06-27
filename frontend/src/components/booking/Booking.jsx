@@ -6,30 +6,35 @@ export default function Booking() {
     const [time, setTime] = useState("")
     const [submitted, setSubmitted] = useState(false)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        setSubmitted(true)
-    }
 
-    const handleDateChange = (e) => {
-        setDate(e.target.value);
-    }
-    
-      const handleTimeChange = (e) => {
-        setTime(e.target.value);
+        const appt = {date, time}
+
+        const response = await fetch("", {
+            method: "POST",
+            body: JSON.stringify(appt),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+        const json = await response.json()
+
+        setSubmitted(true)
     }
 
     /* UI for Booking Form */
     function Forms() {
         return (
-        <form onSubmit={handleSubmit} className="formWrapper">
+        <form onSubmit={handleSubmit} className="formWrapper" action="/book/submit" method="POST">
             <label className="forms">
                 Date of Appointment : {" "}
-                <input type="date" name="date" value={date} required={true} onChange={handleDateChange}/>
+                <input type="date" name="date" value={date} required={true} onChange={(e) => setDate(e.target.value)}/>
                 <br />
                 <br />
                 Time of Appointment : {" "}
-                <input type="time" name="time" value = {time} required={true} onChange={handleTimeChange}/>
+                <input type="time" name="time" value = {time} required={true} onChange={(e) => setTime(e.target.value)}/>
                 <br />
                 <br />
                 <button type="submit">Submit</button>
