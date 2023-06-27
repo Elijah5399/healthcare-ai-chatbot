@@ -19,6 +19,8 @@ export default function Booking() {
         setTime(e.target.value);
     }
 
+    /* testing */
+
     /* UI for Booking Form */
     function Forms() {
         return (
