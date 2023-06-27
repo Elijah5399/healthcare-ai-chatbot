@@ -1,29 +1,8 @@
-.bg-body-tertiary {
-    height: 100px;
+.sghlogo {
+  width: 170px;
+  height: 50px;
+  margin-right: 50px;
 }
-
-.sghlogo{
-    height: 15%;
-    width: 15%;
-    align-self: left;
-    margin-left: -18em;
-}
-
-.container {
-    justify-content: start !important;
-}
-
-.navbarWrapper {
-    display: flex;
-    margin-left: 5em;
-}
-
-.me-auto{
-    font-size: large;
-    padding-left: 5em;
-}
-
 .options {
-    padding-right: 100px !important;
-    display: inline-block;
+  font-size: 20px;
 }
