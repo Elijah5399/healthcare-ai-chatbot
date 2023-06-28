@@ -5,6 +5,8 @@ import Homepage from "./components/homepage/Homepage";
 import Booking from "./components/booking/Booking";
 import Cancelling from "./components/cancelling/Cancelling";
 import Contact from "./components/contact/Contact";
+import Login from "./components/user/Login";
+import Registration from "./components/user/Registration";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // function App() {
@@ -31,6 +33,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 //     </>
 //   );
 // }
+
 
 /* Testing */
 function App() {
@@ -65,6 +68,10 @@ function App() {
           </Routes>
         </div>
       </BrowserRouter>
+      
+      <div className="login">
+        <Login />
+      </div>
     </div>  
   );
 }
