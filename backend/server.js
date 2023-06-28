@@ -21,7 +21,7 @@ expressApp.use(express.urlencoded({ extended: true })) // used to parse URL-enco
 /* Using bookingRoutes in expressApp */
 expressApp.use("/book", bookingRoutes) // this route will only be used when url has "/book"
 expressApp.use("/cancel", cancellingRoutes)
-expressApp.use("/create", userRoutes)
+expressApp.use("/user", userRoutes)
 
 /* Connecting to DB */
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }) // connect to database first
