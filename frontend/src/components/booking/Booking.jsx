@@ -9,17 +9,27 @@ export default function Booking() {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const appt = {date, time}
+        const dateTimeString = `${date} ${time}`
+        const epochValue = new Date(dateTimeString).getTime()
+        console.log(epochValue)
+        // const appt = {id, epochValue} (find a way to obtain a user id to be able to send it in as data)
 
-        const response = await fetch("", {
+        /* submitting a POST request */
+        const response = await fetch("/book/submit", {
             method: "POST",
-            body: JSON.stringify(appt),
+            body: JSON.stringify( /* appt */),
             headers: {
                 "Content-Type": "application/json"
             }
         })
 
-        const json = await response.json()
+        if (response.ok) {
+            setDate("")
+            setTime("")
+        }
+
+        console.log(date)
+        console.log(time)
 
         setSubmitted(true)
     }
@@ -27,7 +37,7 @@ export default function Booking() {
     /* UI for Booking Form */
     function Forms() {
         return (
-        <form onSubmit={handleSubmit} className="formWrapper" action="/book/submit" method="POST">
+        <form onSubmit={handleSubmit} className="formWrapper">
             <label className="forms">
                 Date of Appointment : {" "}
                 <input type="date" name="date" value={date} required={true} onChange={(e) => setDate(e.target.value)}/>

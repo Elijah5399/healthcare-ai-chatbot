@@ -13,7 +13,7 @@ const bookingRoutes = require("./routes/BookingRoutes") // to be able to use the
 const cancellingRoutes = require("./routes/CancellingRoutes")
 const userRoutes = require("./routes/UserRoutes")
 
-/* Middleware (???) */
+/* Middleware */
 expressApp.use(express.json()); // used to parse JSON data in incoming requests
 expressApp.use(express.static("../frontend/index.js")); // help me elijah! im not very sure what this does! oh no!
 expressApp.use(express.urlencoded({ extended: true })) // used to parse URL-encoded data submitted through HTML forms
