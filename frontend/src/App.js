@@ -27,52 +27,39 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 //   }
 
 //   return (
-//     <> 
+//     <>
 //       <MyNavBar />
 //       {component}
 //     </>
 //   );
 // }
 
-
 /* Testing */
 function App() {
   return (
     <div className="app">
       <div className="nav">
-        <MyNavBar />  
+        <MyNavBar />
       </div>
 
       <BrowserRouter>
         <div className="pages">
           <Routes>
-            <Route 
-              path="/"
-              element={<Homepage />}
-            />
+            <Route path="/" element={<Homepage />} />
 
-            <Route
-              path="/book"
-              element={<Booking />}
-            />
+            <Route path="/book" element={<Booking />} />
 
-            <Route
-              path="cancel"
-              element={<Cancelling />}
-            />
+            <Route path="cancel" element={<Cancelling />} />
 
-            <Route
-              path="/contact"
-              element={<Contact />}
-            />
+            <Route path="/contact" element={<Contact />} />
+
+            <Route path="/login" element={<Login />} />
+
+            <Route path="/register" element={<Registration />} />
           </Routes>
         </div>
       </BrowserRouter>
-      
-      <div className="login">
-        <Login />
-      </div>
-    </div>  
+    </div>
   );
 }
 
