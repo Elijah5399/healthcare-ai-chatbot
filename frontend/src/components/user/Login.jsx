@@ -114,7 +114,12 @@ export default function Login() {
 
               <div className="text-center my-3" size="lg">
                 <Button
-                  disabled={errors.username || errors.password}
+                  disabled={
+                    !touched.username ||
+                    !touched.password ||
+                    errors.username ||
+                    errors.password
+                  }
                   type="submit"
                   style={{ width: "130px", height: "50px" }}
                 >

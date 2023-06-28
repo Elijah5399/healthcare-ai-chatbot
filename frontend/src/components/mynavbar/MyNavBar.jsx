@@ -41,7 +41,7 @@ function MyNavBar() {
               Contact Us
             </Nav.Link>
           </Nav>
-          <Nav.Link href="#" className="options">
+          <Nav.Link href="/login" className="options">
             Login
           </Nav.Link>
         </Navbar.Collapse>

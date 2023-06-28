@@ -23,13 +23,18 @@ function App() {
     case "/contact":
       component = <Contact />;
       break;
+    case "/register":
+      component = <Registration />;
+      break;
+    case "/login":
+      component = <Login />;
+      break;
   }
 
   return (
     <>
       <MyNavBar />
-      {/*component*/}
-      <Login />
+      {component}
     </>
   );
 }
