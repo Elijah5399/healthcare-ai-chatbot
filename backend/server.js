@@ -8,31 +8,55 @@ const Appointment = require("./models/AppointmentsModel");
 /* Creating Express App */
 const expressApp = express();
 
+/* Importing appointmentRoutes */
+const bookingRoutes = require("./routes/BookingRoutes") // to be able to use them in expressApp
+const cancellingRoutes = require("./routes/CancellingRoutes")
+const userRoutes = require("./routes/UserRoutes")
+
+/* Middleware */
+expressApp.use(express.json()); // used to parse JSON data in incoming requests
+expressApp.use(express.static("../frontend/index.js")); // help me elijah! im not very sure what this does! oh no!
+expressApp.use(express.urlencoded({ extended: true })) // used to parse URL-encoded data submitted through HTML forms
+
+/* Using bookingRoutes in expressApp */
+expressApp.use("/book", bookingRoutes) // this route will only be used when url has "/book"
+expressApp.use("/cancel", cancellingRoutes)
+expressApp.use("/user", userRoutes)
+
 /* Connecting to DB */
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }) // connect to database first
         .then(() => expressApp.listen(3000, () => { // begin listening for requests second
           console.log("connected to db and listening on port 3000 ")}))
         .catch((error) => console.log(error))
 
-/* Middleware (???) */
-expressApp.use(express.json());
-expressApp.use(express.static("../frontend/index.js"));
 
 /* Reacting to Requests */
 expressApp.get("/", (request, response) => { // when user goes to route "/" --> it fires a response to send back frontend (home page)
-  response.sendFile("../../frontend/src/index.js", { root: __dirname })
+  response.json({mssg: "welcome!"})
+  // response.sendFile("../../frontend/src/index.js", { root: __dirname })
 });
 
-expressApp.get("/add-appt", (request, response) => {
-  const appt = new Appointment({
-    id: "1",
-    date: "2023-06-26T14:30:00"  
-  })
+expressApp.get("/book/submit", async (request, response) => {
+  const {id, dateTime} = request.body
+    
+  try {
+      const appt = await apptModel.create({id, dateTime})
+      response.status(200).json(appt)
+  } catch (error) {
+      response.status(400).json({error: error.message})
+  }
+})
 
-  appt.save()
-      .then((result) => response.send(result))
-      .catch((error) => console.log(error))
-});
+// expressApp.get("/add-appt", (request, response) => {
+//   const appt = new Appointment({
+//     id: "1",
+//     date: "2023-06-26T14:30:00"  
+//   })
+
+//   appt.save()
+//       .then((result) => response.send(result))
+//       .catch((error) => console.log(error))
+// });
 
 expressApp.get("/askQn", (req, res) => {
   executeQueries(
@@ -44,5 +68,5 @@ expressApp.get("/askQn", (req, res) => {
 });
 
 /* Start */
-const usersRoutes = require("./routes/Bookings"); // obtaining the route
+const usersRoutes = require("./routes/BookingRoutes"); // obtaining the route
 expressApp.use("/api/users", usersRoutes); // using the route only when the url consists of /api/users

@@ -6,8 +6,8 @@ const apptSchema = new Schema({
         type: Number,
         required: true
     },
-    date: {
-        type: Date, // able to store both date and time
+    dateTime: {
+        type: Number, // number of seconds or milliseconds that have elapsed since epoch
         required: true
     }
 }, { timestamps: true })

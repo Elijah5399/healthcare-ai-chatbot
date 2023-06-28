@@ -7,35 +7,59 @@ import Cancelling from "./components/cancelling/Cancelling";
 import Contact from "./components/contact/Contact";
 import Login from "./components/user/Login";
 import Registration from "./components/user/Registration";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// function App() {
+//   let component
+//   switch (window.location.pathname) {
+//     case "/":
+//       component = <Homepage />
+//       break
+//     case "/book":
+//       component = <Booking />
+//       break
+//     case "/cancel":
+//       component = <Cancelling />
+//       break
+//     case "/contact":
+//       component = <Contact />
+//       break
+//   }
+
+//   return (
+//     <>
+//       <MyNavBar />
+//       {component}
+//     </>
+//   );
+// }
+
+/* Testing */
 function App() {
-  let component;
-  switch (window.location.pathname) {
-    case "/":
-      component = <Homepage />;
-      break;
-    case "/book":
-      component = <Booking />;
-      break;
-    case "/cancel":
-      component = <Cancelling />;
-      break;
-    case "/contact":
-      component = <Contact />;
-      break;
-    case "/register":
-      component = <Registration />;
-      break;
-    case "/login":
-      component = <Login />;
-      break;
-  }
-
   return (
-    <>
-      <MyNavBar />
-      {component}
-    </>
+    <div className="app">
+      <div className="nav">
+        <MyNavBar />
+      </div>
+
+      <BrowserRouter>
+        <div className="pages">
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+
+            <Route path="/book" element={<Booking />} />
+
+            <Route path="cancel" element={<Cancelling />} />
+
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+
+      <div className="login">
+        <Login />
+      </div>
+    </div>
   );
 }
 

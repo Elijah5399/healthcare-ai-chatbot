@@ -6,17 +6,32 @@ export default function Booking() {
     const [time, setTime] = useState("")
     const [submitted, setSubmitted] = useState(false)
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        setSubmitted(true)
-    }
 
-    const handleDateChange = (e) => {
-        setDate(e.target.value);
-    }
-    
-      const handleTimeChange = (e) => {
-        setTime(e.target.value);
+        const dateTimeString = `${date} ${time}`
+        const epochValue = new Date(dateTimeString).getTime()
+        console.log(epochValue)
+        // const appt = {id, epochValue} (find a way to obtain a user id to be able to send it in as data)
+
+        /* submitting a POST request */
+        const response = await fetch("/book/submit", {
+            method: "POST",
+            body: JSON.stringify( /* appt */),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+
+        if (response.ok) {
+            setDate("")
+            setTime("")
+        }
+
+        console.log(date)
+        console.log(time)
+
+        setSubmitted(true)
     }
 
     /* UI for Booking Form */
@@ -25,11 +40,11 @@ export default function Booking() {
         <form onSubmit={handleSubmit} className="formWrapper">
             <label className="forms">
                 Date of Appointment : {" "}
-                <input type="date" name="date" value={date} required={true} onChange={handleDateChange}/>
+                <input type="date" name="date" value={date} required={true} onChange={(e) => setDate(e.target.value)}/>
                 <br />
                 <br />
                 Time of Appointment : {" "}
-                <input type="time" name="time" value = {time} required={true} onChange={handleTimeChange}/>
+                <input type="time" name="time" value = {time} required={true} onChange={(e) => setTime(e.target.value)}/>
                 <br />
                 <br />
                 <button type="submit">Submit</button>
