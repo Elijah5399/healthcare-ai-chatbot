@@ -7,7 +7,7 @@ import "../../styles/MyNavBar.css";
 
 function MyNavBar() {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary" style={{ width: "100vw" }}>
       {/*
       <a href="/">
         <img className="sghlogo" src={SGHLogo} />

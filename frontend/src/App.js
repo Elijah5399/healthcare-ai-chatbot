@@ -52,13 +52,13 @@ function App() {
             <Route path="cancel" element={<Cancelling />} />
 
             <Route path="/contact" element={<Contact />} />
+
+            <Route path="/login" element={<Login />} />
+
+            <Route path="/register" element={<Registration />} />
           </Routes>
         </div>
       </BrowserRouter>
-
-      <div className="login">
-        <Login />
-      </div>
     </div>
   );
 }
