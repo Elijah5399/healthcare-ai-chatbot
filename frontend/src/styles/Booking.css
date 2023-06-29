@@ -2,32 +2,32 @@
     text-align: center;
   }
   
-  .bookingpageText {
-      margin-top: 1.5em;
-  }
-  
-  .bookingpageIntro {
-      margin-top: 3em;
-      margin-bottom: 3em;
-      border-bottom: 4px solid #16ab50;
-  }
-  
-  .bookingpageDisclaimer {
-      text-align: left !important;
-      margin-left: 100px;
-  }
-  
-  .bookingpageForm {
-      height: 275px;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-  }
-  
-  .forms {
-      font-size: x-large;
-  }
-  
-  button {
-      border-radius: 5px;
-  }
+.bookingpageText {
+    margin-top: 1.5em;
+}
+
+.bookingpageIntro {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    border-bottom: 4px solid #16ab50;
+}
+
+.bookingpageDisclaimer {
+    text-align: left !important;
+    margin-left: 100px;
+}
+
+.bookingpageForm {
+    height: 275px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.forms {
+    font-size: x-large;
+}
+
+button {
+    border-radius: 5px;
+}

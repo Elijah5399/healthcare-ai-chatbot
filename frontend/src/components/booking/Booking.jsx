@@ -11,27 +11,17 @@ export default function Booking() {
 
         const dateTimeString = `${date} ${time}`
         const epochValue = new Date(dateTimeString).getTime()
-        console.log(epochValue)
-        // const appt = {id, epochValue} (find a way to obtain a user id to be able to send it in as data)
+
+        setSubmitted(true)
 
         /* submitting a POST request */
         const response = await fetch("/book/submit", {
             method: "POST",
-            body: JSON.stringify( /* appt */ ),
+            body: JSON.stringify({epochValue}),
             headers: {
                 "Content-Type": "application/json"
             }
         })
-
-        if (response.ok) {
-            setDate("")
-            setTime("")
-        }
-
-        console.log(date)
-        console.log(time)
-
-        setSubmitted(true)
     }
 
     /* UI for Booking Form */

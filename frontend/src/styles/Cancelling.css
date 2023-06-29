@@ -5,3 +5,29 @@
 .cancellingpageText {
     margin-top: 1.5em;
 }
+
+.cancellingpageIntro {
+    margin-top: 3em;
+    margin-bottom: 3em;
+    border-bottom: 4px solid #16ab50;
+}
+
+.currAppointments {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.appt {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    border: 1px black solid;
+    border-radius: 5px;
+    width: 400px;
+}
+
+.appt h4 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

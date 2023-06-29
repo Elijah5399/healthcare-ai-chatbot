@@ -2,11 +2,7 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema // a schema defines the structure of a type of document inside the database
 
 const apptSchema = new Schema({
-    id: {
-        type: Number,
-        required: true
-    },
-    dateTime: {
+    epochValue: {
         type: Number, // number of seconds or milliseconds that have elapsed since epoch
         required: true
     }
