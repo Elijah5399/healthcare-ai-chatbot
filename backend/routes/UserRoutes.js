@@ -1,6 +1,6 @@
 const express = require("express");
 const User = require("../models/UsersModel");
-const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken"); // jwt acts as the connection between frontend and backend,
 
 const router = express.Router();
 
@@ -17,9 +17,9 @@ router.post("/login", async (request, response) => {
     const user = await User.login(email, password);
 
     /* JSON Web Token */
-    // token code here!
+    const token = createToken(user._id);
 
-    response.status(200).json({ user, token });
+    response.status(200).json({ email, token });
   } catch (error) {
     response.status(400).json({ error: error.message });
   }

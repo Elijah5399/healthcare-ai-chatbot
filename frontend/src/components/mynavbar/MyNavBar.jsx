@@ -2,16 +2,12 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import SGHLogo from "../.././SGH-logo.png";
+import SGHLogo from "../../images/SGH-logo.png";
 import "../../styles/MyNavBar.css";
 
 function MyNavBar() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary" style={{ width: "100vw" }}>
-      {/*
-      <a href="/">
-        <img className="sghlogo" src={SGHLogo} />
-  </a> */}
       <Container className="container">
         <Navbar.Brand as="a" href="/">
           <img className="sghlogo" src={SGHLogo} />

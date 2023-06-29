@@ -17,7 +17,7 @@ export default function Booking() {
         /* submitting a POST request */
         const response = await fetch("/book/submit", {
             method: "POST",
-            body: JSON.stringify( /* appt */),
+            body: JSON.stringify( /* appt */ ),
             headers: {
                 "Content-Type": "application/json"
             }
