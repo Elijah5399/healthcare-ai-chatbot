@@ -2,7 +2,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import SGHLogo from "../.././SGH-logo.png";
+import SGHLogo from "../../images/SGH-logo.png";
 import "../../styles/MyNavBar.css";
 
 function MyNavBar() {

@@ -1,7 +1,6 @@
-import ChatbotLogo from ".././chatbot-logo.png";
-import userImage from ".././user-image.png";
+import ChatbotLogo from "../images/chatbot-logo.png";
 import { useState } from "react";
-import userIcon from ".././profileIcon2.jpeg";
+import userIcon from "../images/profileIcon2.jpeg";
 
 export default function Chatbot() {
   {
