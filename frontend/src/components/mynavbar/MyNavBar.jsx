@@ -8,10 +8,6 @@ import "../../styles/MyNavBar.css";
 function MyNavBar() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary" style={{ width: "100vw" }}>
-      {/*
-      <a href="/">
-        <img className="sghlogo" src={SGHLogo} />
-  </a> */}
       <Container className="container">
         <Navbar.Brand as="a" href="/">
           <img className="sghlogo" src={SGHLogo} />

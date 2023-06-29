@@ -1,7 +1,13 @@
 const express = require("express")
 const User = require("../models/UsersModel")
+const jwt = require("jsonwebtoken") // jwt acts as the connection between frontend and backend, 
 
 const router = express.Router()
+
+/* Function to Generate JWT */
+const createToken = (_id) => {
+    return jwt.sign({ _id}, process.env.SECRET, { expiresIn:"3d" }) // SECRET is a variable only known to the backend server to ensure greater security
+}
 
 /* Login */
 router.post("/login", async (request, response) => {
@@ -11,9 +17,9 @@ router.post("/login", async (request, response) => {
         const user = await User.login(email, password)
 
         /* JSON Web Token */
-        // token code here!
+        const token = createToken(user._id)
 
-        response.status(200).json({user, token})
+        response.status(200).json({email, token})
     } catch (error) {
         response.status(400).json({error: error.message})
     }
@@ -25,7 +31,11 @@ router.post("/signup", async (request, response) => {
 
     try {
         const user = await User.signup(name, email, password) // .signup() is a statically created function in UsersModel.js
-        response.status(200).json({email, user})
+
+        /* JSON Web Token */
+        const token = createToken(user._id)
+
+        response.status(200).json({email, token})
     } catch (error) {
         response.status(400).json({error: error.message})
     }
