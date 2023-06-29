@@ -11,6 +11,27 @@ import * as yup from "yup";
 export default function Login() {
   const { Formik } = formik;
 
+  const handleSubmit = async (e) => {
+    const username = e.username;
+    const password = e.password;
+
+    const response = await fetch("/user/login", {
+      method: "POST",
+      body: { username, password },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (response.ok) {
+      alert("Response ok");
+    } else {
+      alert("Respone not ok");
+    }
+
+    alert(username + password);
+  };
+
   const schema = yup.object().shape({
     username: yup
       .string()
@@ -32,11 +53,7 @@ export default function Login() {
         <Card.Title as="h1" style={{ marginTop: "10px" }}>
           Sign in
         </Card.Title>
-        <Formik
-          validationSchema={schema}
-          onSubmit={console.log}
-          initialValues={{ username: "", password: "" }}
-        >
+        <Formik validationSchema={schema} onSubmit={handleSubmit}>
           {({
             handleSubmit,
             handleChange,
