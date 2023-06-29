@@ -12,20 +12,18 @@ const createToken = (_id) => {
 /* Login */
 router.post("/login", async (request, response) => {
   const obj = request.body;
-  const username = obj.username;
+  const name = obj.username;
   const password = obj.password;
-  //console.log("username is: " + username);
-  //console.log("password is: " + password);
 
   try {
-    const user = await User.login(username, password);
+    const user = await User.login(name, password);
 
     /* JSON Web Token */
     const token = createToken(user._id);
 
-    response.status(200).json({ username, token });
+    response.status(200).json({ name, token });
   } catch (error) {
-    console.log(error.message);
+    //console.log(error.message);
     response.status(400).json({ error: error.message });
   }
 });
@@ -46,6 +44,19 @@ router.post("/signup", async (request, response) => {
     response.status(200).json({ name, token });
   } catch (error) {
     response.status(400).json({ error: error.message });
+  }
+});
+
+router.post("/verify", (request, response) => {
+  //console.log(request.body);
+  //console.log("token is: " + request.body.token);
+  const token = request.body.token;
+
+  try {
+    jwt.verify(token, process.env.SECRET);
+    response.status(200).json({ message: "Verification successful" });
+  } catch (e) {
+    response.status(400).json({ message: e.message });
   }
 });
 

@@ -1,16 +1,51 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import SGHLogo from "../../images/SGH-logo.png";
 import "../../styles/MyNavBar.css";
+import { useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 function MyNavBar() {
+  const [user, setUser] = useState("");
+
+  //on clicking logout button, remove name and token from local storage and remove user
+  function handleLogout() {
+    localStorage.removeItem("name");
+    localStorage.removeItem("token");
+    setUser("");
+  }
+
+  useEffect(() => {
+    if (localStorage.name && localStorage.token) {
+      //console.log("token is: " + localStorage.getItem("token"));
+      const token = localStorage.getItem("token");
+      fetch("/user/verify", {
+        method: "POST",
+        body: JSON.stringify({ token: token }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          //console.log("res status 200");
+          //if the user is successfully validated, set their username
+          setUser(localStorage.getItem("name"));
+        } else {
+          //console.log("res status not 200");
+          //do nothing
+          //console.log(res.message);
+        }
+      });
+    }
+  });
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary" style={{ width: "100vw" }}>
       <Container className="container">
         <Navbar.Brand as="a" href="/">
-          <img className="sghlogo" src={SGHLogo} />
+          <img className="sghlogo" src={SGHLogo} alt="SGH" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -37,9 +72,22 @@ function MyNavBar() {
               Contact Us
             </Nav.Link>
           </Nav>
-          <Nav.Link href="/login" className="options">
-            Login
-          </Nav.Link>
+          {user ? (
+            <Navbar.Text className="options">
+              {user}
+              <button className="logoutIconWrapper" onClick={handleLogout}>
+                <FontAwesomeIcon
+                  icon={faArrowRightFromBracket}
+                  size="lg"
+                  className="logoutIcon"
+                />
+              </button>
+            </Navbar.Text>
+          ) : (
+            <Nav.Link href="/login" className="options">
+              Login
+            </Nav.Link>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>
