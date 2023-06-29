@@ -1,9 +1,9 @@
 import "../../styles/Contact.css";
-import FBLogo from '../.././FB-logo.png';
-import IGLogo from '../.././IG-logo.png';
-import TTLogo from '../.././TT-logo.png';
-import YTLogo from '../.././YT-logo.png';
-import SGHMap from '../.././SGH-map.png';
+import FBLogo from '../../images/FB-logo.png';
+import IGLogo from '../../images/IG-logo.png';
+import TTLogo from '../../images/TT-logo.png';
+import YTLogo from '../../images/YT-logo.png';
+import SGHMap from '../../images/SGH-map.png';
 
 export default function Contact() {
     return (
