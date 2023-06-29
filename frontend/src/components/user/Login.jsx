@@ -4,32 +4,41 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
-import * as formik from "formik";
+import { Formik } from "formik";
 import * as yup from "yup";
 
 export default function Login() {
-  const { Formik } = formik;
+  //potential errors from server-side validation
+  const [errors, setErrors] = useState("");
 
   const handleSubmit = async (e) => {
     const username = e.username;
     const password = e.password;
+    const obj = { username, password };
 
-    const response = await fetch("/user/login", {
+    //submit a post request to the backend API endpoint
+    await fetch("/user/login", {
       method: "POST",
-      body: { username, password },
+      body: JSON.stringify(obj),
       headers: {
         "Content-Type": "application/json",
       },
-    });
-
-    if (response.ok) {
-      alert("Response ok");
-    } else {
-      alert("Respone not ok");
-    }
-
-    alert(username + password);
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          //if we retrieve any errors we don't redirect, just display the error msg
+          setErrors(data.error);
+        } else {
+          //TODO: pass on the username and token to other pages
+          const username = data.username;
+          const token = data.token;
+          //if the login is successful, redirect user to main page
+          window.location.href = "/";
+        }
+      }); // Note that both 200 and 400 statuses do not produce errors
   };
 
   const schema = yup.object().shape({
@@ -53,7 +62,17 @@ export default function Login() {
         <Card.Title as="h1" style={{ marginTop: "10px" }}>
           Sign in
         </Card.Title>
-        <Formik validationSchema={schema} onSubmit={handleSubmit}>
+        <span style={{ color: "red" }}>{errors ? errors : ""}</span>
+        <Formik
+          validationSchema={schema}
+          onSubmit={handleSubmit}
+          initialValues={{
+            email: "",
+            username: "",
+            password: "",
+            confirm_password: "",
+          }}
+        >
           {({
             handleSubmit,
             handleChange,

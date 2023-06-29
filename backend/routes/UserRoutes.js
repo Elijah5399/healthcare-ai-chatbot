@@ -11,23 +11,31 @@ const createToken = (_id) => {
 
 /* Login */
 router.post("/login", async (request, response) => {
-  const { email, password } = request.body;
+  const obj = request.body;
+  const username = obj.username;
+  const password = obj.password;
+  //console.log("username is: " + username);
+  //console.log("password is: " + password);
 
   try {
-    const user = await User.login(email, password);
+    const user = await User.login(username, password);
 
     /* JSON Web Token */
     const token = createToken(user._id);
 
-    response.status(200).json({ email, token });
+    response.status(200).json({ username, token });
   } catch (error) {
+    console.log(error.message);
     response.status(400).json({ error: error.message });
   }
 });
 
 /* Signup */
 router.post("/signup", async (request, response) => {
-  const { name, email, password } = request.body;
+  const obj = request.body;
+  const name = obj.name;
+  const email = obj.email;
+  const password = obj.password;
 
   try {
     const user = await User.signup(name, email, password); // .signup() is a statically created function in UsersModel.js
@@ -35,7 +43,7 @@ router.post("/signup", async (request, response) => {
     /* JSON Web Token */
     const token = createToken(user._id);
 
-    response.status(200).json({ email, user });
+    response.status(200).json({ name, token });
   } catch (error) {
     response.status(400).json({ error: error.message });
   }

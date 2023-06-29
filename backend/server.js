@@ -32,7 +32,7 @@ mongoose
   .then(() =>
     expressApp.listen(3001, () => {
       // begin listening for requests second
-      console.log("connected to db and listening on port 3000 ");
+      console.log("connected to db and listening on port 3001 ");
     })
   )
   .catch((error) => console.log(error));

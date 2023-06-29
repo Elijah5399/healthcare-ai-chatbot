@@ -8,8 +8,40 @@ import Button from "react-bootstrap/Button";
 import { Formik } from "formik";
 import * as yup from "yup";
 import validator from "validator";
+import { useState } from "react";
 
 export default function Registration() {
+  //potential errors from server-side validation
+  const [errors, setErrors] = useState("");
+
+  const handleSubmit = async (e) => {
+    const email = e.email;
+    const name = e.username;
+    const password = e.password;
+    const obj = { email, name, password };
+
+    await fetch("/user/signup", {
+      method: "POST",
+      body: JSON.stringify(obj),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          //if we retrieve any errors we don't redirect, just display the error msg
+          setErrors(data.error);
+        } else {
+          //TODO: pass on the username and token to other pages
+          const name = data.name;
+          const token = data.token;
+          //if the login is successful, redirect user to main page
+          window.location.href = "/";
+        }
+      });
+  };
+
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -36,6 +68,7 @@ export default function Registration() {
         return this.parent.password === value;
       }),
   });
+
   return (
     <div className="loginWrapper">
       <Card className="registerCard">
@@ -47,9 +80,12 @@ export default function Registration() {
         <Card.Title as="h1" style={{ marginTop: "10px" }}>
           Sign up
         </Card.Title>
+
+        <span style={{ color: "red" }}>{errors ? errors : ""}</span>
+
         <Formik
           validationSchema={schema}
-          onSubmit={console.log}
+          onSubmit={handleSubmit}
           initialValues={{
             email: "",
             username: "",
