@@ -6,8 +6,9 @@ const validator = require("validator"); // validator is a npm package that allow
 const userSchema = new Schema(
   {
     name: {
-      type: String,
-      required: true,
+        type: String,
+        required: true,
+        unique: true
     },
     email: {
       type: String,
