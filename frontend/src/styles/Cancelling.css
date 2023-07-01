@@ -25,9 +25,20 @@
     border: 1px black solid;
     border-radius: 5px;
     width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .appt h4 {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.trash-icon {
+    font-size: 2em;
+}
+
+.trash-icon:hover {
+    cursor: pointer;
 }

@@ -1,5 +1,6 @@
 import "../../styles/Cancelling.css";
 import { useState, useEffect } from "react";
+import { BsFillTrashFill } from "react-icons/bs";
 
 export default function Cancelling() {
     const[appts, setAppt] = useState(null)
@@ -20,6 +21,19 @@ export default function Cancelling() {
     }, [])
 
     function AppointmentDetails({ appt }) {
+        /* Function to Handle Click */
+        const handleClick = async () => {
+            const response = await fetch("/cancel/" + appt._id, {
+                method: "DELETE"
+            })
+
+            // const json = await response.json()
+
+            // if (response.ok) {
+            //     console.log("ok")
+            // }
+        }
+
         const date = new Date(appt.epochValue)
 
         const year = date.getFullYear()
@@ -31,8 +45,13 @@ export default function Cancelling() {
         
         return(
             <div className="appt">
-                <h4>Date: {`${day}-${month}-${year}`}</h4>
-                <h4>Time: {`${hour}:${minutes}`}</h4>
+                <div className="dateTime">
+                    <h4>Date: {`${day}-${month}-${year}`}</h4>
+                    <h4>Time: {`${hour}:${minutes}`}</h4>
+                </div>
+                <div className="icon">
+                    <BsFillTrashFill className="trash-icon" onClick={handleClick} />
+                </div>
             </div>
         )
     }
