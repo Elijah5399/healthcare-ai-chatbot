@@ -8,8 +8,79 @@ import Button from "react-bootstrap/Button";
 import { Formik } from "formik";
 import * as yup from "yup";
 import validator from "validator";
+import { useState, useEffect } from "react";
 
 export default function Registration() {
+  //potential errors from server-side validation
+  const [errors, setErrors] = useState("");
+
+  //if user is already logged in, this redirects them to the homepage
+  useEffect(() => {
+    if (localStorage.name && localStorage.token) {
+      //console.log("token is: " + localStorage.getItem("token"));
+      const token = localStorage.getItem("token");
+      fetch("/user/verify", {
+        method: "POST",
+        body: JSON.stringify({ token: token }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          //if user is successfully validated, redirect to home page
+          window.location.href = "/";
+        } else {
+          //console.log("res status not 200");
+          //do nothing
+          //console.log(res.message);
+        }
+      });
+    }
+  });
+
+  if (localStorage.name && localStorage.token) {
+    fetch("/user/verify", {
+      method: "POST",
+      body: JSON.stringify({ token: localStorage.token }),
+    }).then((res) => {
+      if (res.status === 200) {
+        //if the user is successfully validated, redirect them to the homepage
+        window.location.href = "/";
+      } else {
+        //do nothing; proceed with login
+        //console.log(res.data.message);
+      }
+    });
+  }
+
+  const handleSubmit = async (e) => {
+    const email = e.email;
+    const name = e.username;
+    const password = e.password;
+    const obj = { email, name, password };
+
+    await fetch("/user/signup", {
+      method: "POST",
+      body: JSON.stringify(obj),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          //if we retrieve any errors we don't redirect, just display the error msg
+          setErrors(data.error);
+        } else {
+          //retrieve name and token from data, and put in local storage
+          localStorage.setItem("name", data.name);
+          localStorage.setItem("token", data.token);
+          //if the login is successful, redirect user to main page
+          window.location.href = "/";
+        }
+      });
+  };
+
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -36,6 +107,7 @@ export default function Registration() {
         return this.parent.password === value;
       }),
   });
+
   return (
     <div className="loginWrapper">
       <Card className="registerCard">
@@ -47,9 +119,12 @@ export default function Registration() {
         <Card.Title as="h1" style={{ marginTop: "10px" }}>
           Sign up
         </Card.Title>
+
+        <span style={{ color: "red" }}>{errors ? errors : ""}</span>
+
         <Formik
           validationSchema={schema}
-          onSubmit={console.log}
+          onSubmit={handleSubmit}
           initialValues={{
             email: "",
             username: "",
