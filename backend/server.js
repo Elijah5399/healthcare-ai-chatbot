@@ -14,6 +14,9 @@ const cancellingRoutes = require("./routes/CancellingRoutes");
 const userRoutes = require("./routes/UserRoutes");
 const paymentRoutes = require("./routes/PaymentRoutes");
 
+/* Payment routes needs to come before app.use(express.json()) */
+expressApp.use("/payment", paymentRoutes);
+
 /* Middleware */
 expressApp.use(express.json()); // used to parse JSON data in incoming requests
 expressApp.use(express.static("../frontend/index.js")); // help me elijah! im not very sure what this does! oh no!
@@ -23,7 +26,6 @@ expressApp.use(express.urlencoded({ extended: true })); // used to parse URL-enc
 expressApp.use("/book", bookingRoutes); // this route will only be used when url has "/book"
 expressApp.use("/cancel", cancellingRoutes);
 expressApp.use("/user", userRoutes);
-expressApp.use("/payment", paymentRoutes);
 
 /* Connecting to DB */
 mongoose

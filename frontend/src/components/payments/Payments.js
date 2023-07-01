@@ -2,7 +2,7 @@ export function PaymentMain() {
   return (
     <>
       <h1>
-        You are paying SGD $0.01 to book an appointment. Click the button below
+        You are paying SGD $1.00 to book an appointment. Click the button below
         to checkout.
       </h1>
       <form action="/payment/create-checkout-session" method="POST">
