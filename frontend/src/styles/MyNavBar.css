@@ -6,3 +6,18 @@
 .options {
   font-size: 20px;
 }
+.logoutIconWrapper {
+  background: none;
+  color: inherit;
+  border: none;
+  margin-left: 10px;
+  font: inherit;
+}
+
+.logoutIcon {
+  color: #4f4f4f;
+}
+
+.logoutIcon:hover {
+  color: #f83535;
+}
