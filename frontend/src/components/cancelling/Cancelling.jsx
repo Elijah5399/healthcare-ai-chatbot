@@ -27,11 +27,11 @@ export default function Cancelling() {
                 method: "DELETE"
             })
 
-            // const json = await response.json()
+            const json = await response.json()
 
-            // if (response.ok) {
-            //     console.log("ok")
-            // }
+            if (response.ok) {
+                console.log("ok")
+            }
         }
 
         const date = new Date(appt.epochValue)
