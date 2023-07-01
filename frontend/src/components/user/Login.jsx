@@ -4,12 +4,66 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
-import * as formik from "formik";
+import { Formik } from "formik";
 import * as yup from "yup";
 
 export default function Login() {
-  const { Formik } = formik;
+  //potential errors from server-side validation
+  const [errors, setErrors] = useState("");
+
+  //if user is already logged in, this redirects them to the homepage
+  useEffect(() => {
+    if (localStorage.name && localStorage.token) {
+      //console.log("token is: " + localStorage.getItem("token"));
+      const token = localStorage.getItem("token");
+      fetch("/user/verify", {
+        method: "POST",
+        body: JSON.stringify({ token: token }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          //if user is successfully validated, redirect to home page
+          window.location.href = "/";
+        } else {
+          //console.log("res status not 200");
+          //do nothing
+          //console.log(res.message);
+        }
+      });
+    }
+  });
+
+  const handleSubmit = async (e) => {
+    const username = e.username;
+    const password = e.password;
+    const obj = { username, password };
+
+    //submit a post request to the backend API endpoint
+    await fetch("/user/login", {
+      method: "POST",
+      body: JSON.stringify(obj),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.error) {
+          //if we retrieve any errors we don't redirect, just display the error msg
+          setErrors(data.error);
+        } else {
+          //retrieve name and token from data, and put in local storage
+          localStorage.setItem("name", data.name);
+          localStorage.setItem("token", data.token);
+          //redirect user to home page
+          window.location.href = "/";
+        }
+      }); // Note that both 200 and 400 statuses do not produce errors
+  };
 
   const schema = yup.object().shape({
     username: yup
@@ -21,6 +75,7 @@ export default function Login() {
       .required("No password provided.")
       .min(8, "Password must be at least 8 characters long."),
   });
+
   return (
     <div className="loginWrapper">
       <Card className="loginCard">
@@ -32,10 +87,16 @@ export default function Login() {
         <Card.Title as="h1" style={{ marginTop: "10px" }}>
           Sign in
         </Card.Title>
+        <span style={{ color: "red" }}>{errors ? errors : ""}</span>
         <Formik
           validationSchema={schema}
-          onSubmit={console.log}
-          initialValues={{ username: "", password: "" }}
+          onSubmit={handleSubmit}
+          initialValues={{
+            email: "",
+            username: "",
+            password: "",
+            confirm_password: "",
+          }}
         >
           {({
             handleSubmit,

@@ -1,7 +1,7 @@
-const express = require("express")
-const Appointment = require("../models/AppointmentsModel")
+const express = require("express");
+const Appointment = require("../models/AppointmentsModel");
 
-const router = express.Router()
+const router = express.Router();
 
 /* Handling a POST request */
 router.post("/submit", async (request, response) => { // request to access data being sent   
@@ -15,4 +15,4 @@ router.post("/submit", async (request, response) => { // request to access data 
     }
 })
 
-module.exports = router
+module.exports = router;
