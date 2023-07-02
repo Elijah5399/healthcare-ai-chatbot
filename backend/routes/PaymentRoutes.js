@@ -53,17 +53,6 @@ router.post("/create-checkout-session", async (req, res) => {
 
 //TODO: Attach the appointment to the specified user
 const fulfillOrder = (lineItems) => {
-  /*
-    const dateTimeString = `${date} ${time}`;
-    const epochValue = new Date(dateTimeString).getTime();
-    const response = await fetch("/book/submit", {
-      method: "POST",
-      body: JSON.stringify({ epochValue }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    */
   console.log("Fulfilling order", lineItems);
   const data = lineItems.data;
   const token = localStorage.getItem("token");
