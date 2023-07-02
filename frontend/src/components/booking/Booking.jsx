@@ -21,8 +21,19 @@ export default function Booking() {
     setSubmitted(true);
 
     /* submitting a POST request */
+    const res = await fetch("/payment/create-checkout-session", {
+      method: "POST",
+      body: JSON.stringify({ date, time }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const body = await res.json();
+    window.location.href = body.url;
     /* Delay this till after payment is confirmed */
 
+    /*
     const response = await fetch("/book/submit", {
       method: "POST",
       body: JSON.stringify({ epochValue }),
@@ -30,6 +41,12 @@ export default function Booking() {
         "Content-Type": "application/json",
       },
     });
+    */
+    /*
+    <form action="/payment/create-checkout-session" method="POST">
+      <button type="submit">Checkout</button>
+    </form>;
+    */
   };
 
   const apptSchema = Yup.object().shape({
@@ -86,7 +103,11 @@ export default function Booking() {
                 {touched.time && errors.time ? (
                   <span style={{ color: "red" }}>{errors.time}</span>
                 ) : null}
-                <br />
+                <h4 className="confMsg">
+                  {touched.time && !errors.time && touched.date && !errors.date
+                    ? `Click the button below to make payment for your appointment on ${values.date} at ${values.time}`
+                    : ""}
+                </h4>
                 <button
                   type="submit"
                   disabled={
@@ -112,10 +133,7 @@ export default function Booking() {
     return (
       <div className="submitWrapper">
         <div className="submitText">
-          <h2>Submitted!</h2>
-          <h5>
-            Your apppointment has been set on {date} at {time}
-          </h5>
+          <h5>Redirecting you to the payment link...</h5>
         </div>
       </div>
     );

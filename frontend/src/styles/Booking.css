@@ -35,3 +35,8 @@ button {
 .errorDate {
   border: 2px solid red;
 }
+
+.confMsg {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}

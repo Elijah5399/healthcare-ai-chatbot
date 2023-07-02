@@ -4,13 +4,18 @@ const Appointment = require("../models/AppointmentsModel");
 const router = express.Router();
 
 router.post("/create-checkout-session", async (req, res) => {
+  const data = req.body;
+  const apptDate = data.date;
+  const apptTime = data.time;
+  console.log("Date of appt is:" + apptDate);
+  console.log("Time of appt is:" + apptTime);
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {
         price_data: {
           currency: "sgd",
           product_data: {
-            name: "Appointment",
+            name: `Appointment on ${apptDate} at ${apptTime}`,
           },
           unit_amount: 100,
         },
@@ -22,7 +27,8 @@ router.post("/create-checkout-session", async (req, res) => {
     cancel_url: `http://localhost:3000/payment/cancel`,
   });
 
-  res.redirect(303, session.url);
+  //res.redirect(303, session.url);
+  res.json({ url: session.url });
 });
 
 //This function handles order fulfilment. lineItems is a JSON obj with the following structure:
