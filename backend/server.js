@@ -12,6 +12,10 @@ const expressApp = express();
 const bookingRoutes = require("./routes/BookingRoutes"); // to be able to use them in expressApp
 const cancellingRoutes = require("./routes/CancellingRoutes");
 const userRoutes = require("./routes/UserRoutes");
+const paymentRoutes = require("./routes/PaymentRoutes");
+
+/* Payment routes needs to come before app.use(express.json()) */
+expressApp.use("/payment", paymentRoutes);
 
 /* Middleware */
 expressApp.use(express.json()); // used to parse JSON data in incoming requests
@@ -24,10 +28,18 @@ expressApp.use("/cancel", cancellingRoutes);
 expressApp.use("/user", userRoutes);
 
 /* Connecting to DB */
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }) // connect to database first
-        .then(() => expressApp.listen(3001, () => { // begin listening for requests second
-          console.log("connected to db and listening on port 3001")}))
-        .catch((error) => console.log(error))
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }) // connect to database first
+  .then(() =>
+    expressApp.listen(3001, () => {
+      // begin listening for requests second
+      console.log("connected to db and listening on port 3001");
+    })
+  )
+  .catch((error) => console.log(error));
 
 /* Elijah's Nonsense */
 expressApp.get("/askQn", (req, res) => {
