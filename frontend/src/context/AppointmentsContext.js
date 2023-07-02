@@ -14,7 +14,7 @@ export const useAppointmentsContext = () => {
 }
 
 export const apptsReducer = (prevState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case "GET_APPOINTMENT":
             return {
                 appts: action.payload

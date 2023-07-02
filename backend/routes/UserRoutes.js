@@ -48,15 +48,13 @@ router.post("/signup", async (request, response) => {
 });
 
 router.post("/verify", (request, response) => {
-  //console.log(request.body);
-  //console.log("token is: " + request.body.token);
   const token = request.body.token;
 
   try {
     jwt.verify(token, process.env.SECRET);
     response.status(200).json({ message: "Verification successful" });
-  } catch (e) {
-    response.status(400).json({ message: e.message });
+  } catch (error) {
+    response.status(400).json({ error: error.message });
   }
 });
 
