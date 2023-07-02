@@ -13,8 +13,10 @@ const bookingRoutes = require("./routes/BookingRoutes"); // to be able to use th
 const cancellingRoutes = require("./routes/CancellingRoutes");
 const userRoutes = require("./routes/UserRoutes");
 const paymentRoutes = require("./routes/PaymentRoutes");
+const webhookRoutes = require("./routes/Webhook");
 
-/* Payment routes needs to come before app.use(express.json()) */
+/* Webhook route needs to come before app.use(express.json()) */
+expressApp.use("/webhook", webhookRoutes);
 
 /* Middleware */
 expressApp.use(express.json()); // used to parse JSON data in incoming requests

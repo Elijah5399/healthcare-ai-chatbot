@@ -31,22 +31,6 @@ export default function Booking() {
 
     const body = await res.json();
     window.location.href = body.url;
-    /* Delay this till after payment is confirmed */
-
-    /*
-    const response = await fetch("/book/submit", {
-      method: "POST",
-      body: JSON.stringify({ epochValue }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    */
-    /*
-    <form action="/payment/create-checkout-session" method="POST">
-      <button type="submit">Checkout</button>
-    </form>;
-    */
   };
 
   const apptSchema = Yup.object().shape({
