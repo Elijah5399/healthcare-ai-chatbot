@@ -1,9 +1,11 @@
 import "../../styles/Cancelling.css";
 import { useState, useEffect } from "react";
 import { BsFillTrashFill } from "react-icons/bs";
+import { useAppointmentsContext } from "../../context/AppointmentsContext";
 
 export default function Cancelling() {
-    const[appts, setAppt] = useState(null)
+    // const[appts, setAppt] = useState(null)
+    const {appts, dispatch} = useAppointmentsContext()
 
     /* Function to Fetch User's Appointments */
     useEffect(() => {
@@ -12,7 +14,8 @@ export default function Cancelling() {
             const json = await response.json() // array of data
 
             if (response.ok) {
-                setAppt(json)
+                // setAppt(json)
+                dispatch({type: "GET_APPOINTMENT", payload: json})
             }
 
         }
@@ -21,17 +24,19 @@ export default function Cancelling() {
     }, [])
 
     function AppointmentDetails({ appt }) {
+        const { dispatch } = useAppointmentsContext()
+
         /* Function to Handle Click */
         const handleClick = async () => {
             const response = await fetch("/cancel/" + appt._id, {
                 method: "DELETE"
             })
 
-            // const json = await response.json()
+            const json = await response.json()
 
-            // if (response.ok) {
-            //     console.log("ok")
-            // }
+            if (response.ok) {
+                dispatch({type: "DEL_APPOINTMENT", payload: json})
+            }
         }
 
         const date = new Date(appt.epochValue)
