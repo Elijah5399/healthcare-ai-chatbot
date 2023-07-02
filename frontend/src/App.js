@@ -10,32 +10,6 @@ import Registration from "./components/user/Registration";
 import { PaymentSuccess, PaymentCancel } from "./components/payments/Payments";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-// function App() {
-//   let component
-//   switch (window.location.pathname) {
-//     case "/":
-//       component = <Homepage />
-//       break
-//     case "/book":
-//       component = <Booking />
-//       break
-//     case "/cancel":
-//       component = <Cancelling />
-//       break
-//     case "/contact":
-//       component = <Contact />
-//       break
-//   }
-
-//   return (
-//     <>
-//       <MyNavBar />
-//       {component}
-//     </>
-//   );
-// }
-
-/* Testing */
 function App() {
   return (
     <div className="app">

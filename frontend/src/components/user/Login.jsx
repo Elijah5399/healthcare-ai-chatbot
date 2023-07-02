@@ -8,10 +8,12 @@ import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import { Formik } from "formik";
 import * as yup from "yup";
+import { AuthenticationContext, useAuthenticationContext } from "../../context/AuthenticationContext";
 
 export default function Login() {
   //potential errors from server-side validation
   const [errors, setErrors] = useState("");
+  const { dispatch } = useAuthenticationContext()
 
   //if user is already logged in, this redirects them to the homepage
   useEffect(() => {
@@ -59,6 +61,10 @@ export default function Login() {
           //retrieve name and token from data, and put in local storage
           localStorage.setItem("name", data.name);
           localStorage.setItem("token", data.token);
+
+          // update authentication context
+          // dispatch({type: "LOGIN", payload: json})
+
           //redirect user to home page
           window.location.href = "/";
         }
