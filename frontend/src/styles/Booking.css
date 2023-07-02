@@ -1,33 +1,42 @@
 .bookingpageWrapper {
-    text-align: center;
-  }
-  
+  text-align: center;
+}
+
 .bookingpageText {
-    margin-top: 1.5em;
+  margin-top: 1.5em;
 }
 
 .bookingpageIntro {
-    margin-top: 3em;
-    margin-bottom: 3em;
-    border-bottom: 4px solid #16ab50;
+  margin-top: 3em;
+  margin-bottom: 3em;
+  border-bottom: 4px solid #16ab50;
 }
 
 .bookingpageDisclaimer {
-    text-align: left !important;
-    margin-left: 100px;
+  text-align: left !important;
+  margin-left: 100px;
 }
 
 .bookingpageForm {
-    height: 275px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+  height: 275px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .forms {
-    font-size: x-large;
+  font-size: x-large;
 }
 
 button {
-    border-radius: 5px;
+  border-radius: 5px;
+}
+
+.errorDate {
+  border: 2px solid red;
+}
+
+.confMsg {
+  margin-top: 10px;
+  margin-bottom: 15px;
 }

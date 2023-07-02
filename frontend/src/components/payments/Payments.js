@@ -1,21 +1,26 @@
-export function PaymentMain() {
+import "../../styles/Payment.css";
+import Button from "react-bootstrap/Button";
+
+export function PaymentSuccess() {
   return (
-    <>
-      <h1>
-        You are paying SGD $1.00 to book an appointment. Click the button below
-        to checkout.
-      </h1>
-      <form action="/payment/create-checkout-session" method="POST">
-        <button type="submit">Checkout</button>
-      </form>
-    </>
+    <div className="paymentWrapper">
+      <h2 className="paymentHeader">
+        Payment has been successfully made. Click the button below to view your
+        appointments.
+      </h2>
+      <Button href="/cancel">Appointments</Button>
+    </div>
   );
 }
 
-export function PaymentSuccess() {
-  return <h1>Payment made successfully.</h1>;
-}
-
 export function PaymentCancel() {
-  return <h1>Payment made successfully.</h1>;
+  return (
+    <div className="paymentWrapper">
+      <h2 className="paymentHeader">
+        Payment has been cancelled. Click the button below to book an
+        appointment.
+      </h2>
+      <Button href="/book">Book</Button>
+    </div>
+  );
 }

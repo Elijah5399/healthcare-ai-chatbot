@@ -1,0 +1,9 @@
+.paymentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.paymentHeader {
+  text-align: center;
+  margin: 20px auto;
+}

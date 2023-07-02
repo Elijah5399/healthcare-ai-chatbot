@@ -3,76 +3,29 @@ const express = require("express");
 const Appointment = require("../models/AppointmentsModel");
 const router = express.Router();
 
-router.post("/create-checkout-session", async (req, res) => {
-  const data = req.body;
-  const apptDate = data.date;
-  const apptTime = data.time;
-  const session = await stripe.checkout.sessions.create({
-    line_items: [
-      {
-        price_data: {
-          currency: "sgd",
-          product_data: {
-            name: `Appointment on ${apptDate} at ${apptTime}`,
-          },
-          unit_amount: 100,
-        },
-        quantity: 1,
-      },
-    ],
-    mode: "payment",
-    success_url: "http://localhost:3000/payment/success",
-    cancel_url: `http://localhost:3000/payment/cancel`,
-  });
-
-  res.json({ url: session.url });
-});
-
-//This function handles order fulfilment. lineItems is a JSON obj with the following structure:
-/*
-{
-  object: 'list',
-  data: [
-    {
-      id: 'blablabla',
-      object: 'item',
-      amount_discount: 0,
-      amount_subtotal: 100,
-      amount_tax: 0,
-      amount_total: 100,
-      currency: 'sgd',
-      description: 'Appointment',
-      price: [Object],
-      quantity: 1
-    }
-  ],
-  has_more: false,
-  url: '/v1/checkout/sessions/cs_test_a1rBLABLABLA/line_items'
-}
-*/
-
 //TODO: Attach the appointment to the specified user
 const fulfillOrder = (lineItems) => {
-  /*
-    const dateTimeString = `${date} ${time}`;
-    const epochValue = new Date(dateTimeString).getTime();
-    const response = await fetch("/book/submit", {
-      method: "POST",
-      body: JSON.stringify({ epochValue }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    */
   console.log("Fulfilling order", lineItems);
   const data = lineItems.data;
-  const token = localStorage.getItem("token");
-  const user = localStorage.getItem("name");
-  const epochValue = Date.now();
+  //const epochValue = Date.now();
   for (var i = 0; i < data.length; i++) {
     //iterate through every item they purchased and add them to the database
+    const description = data[i].description;
+    const parsed = description.split(" ");
+    const date = parsed[2];
+    const time = parsed[4];
+    //console.log("appt date is: ", date);
+    //console.log("appt time is: ", time);
     try {
-      const appt = Appointment.create({ epochValue });
+      const dateTimeString = `${date} ${time}`;
+      const epochValue = new Date(dateTimeString).getTime();
+      const response = fetch("http://localhost:3001/book/submit", {
+        method: "POST",
+        body: JSON.stringify({ epochValue }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
     } catch (err) {
       console.error(err);
     }
@@ -82,10 +35,12 @@ const fulfillOrder = (lineItems) => {
 //this is a webhook. Whenever a user successfully makes payment, stripe sends a post req to this webhook and
 //is received by us
 
-//NOTE: The req is sent to localhost:3001/payment/webhook
+//NOTE: The req is sent to localhost:3001/webhook, must use the stripe CLI to forward the webhook first
+//follow this link to get the webhook working
+//https://stripe.com/docs/webhooks/test
 
 router.post(
-  "/webhook",
+  "/",
   express.raw({ type: "application/json" }),
   async (req, res) => {
     const payload = req.body;
