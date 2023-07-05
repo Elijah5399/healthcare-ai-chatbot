@@ -1,4 +1,4 @@
-import { createContext, useReducer, useContext } from "react";
+import { createContext, useReducer, useContext, useState, useEffect } from "react";
 
 export const AuthenticationContext = createContext()
 
@@ -16,11 +16,11 @@ export const authReducer = (prevState, action) => {
     switch (action.type) {
         case "LOGIN":
             return {
-                user: action.payload
+                globalState: action.payload
             }
         case "LOGOUT":
             return {
-                user: null
+                globalState: null
             }
         default:
             return prevState
@@ -28,9 +28,18 @@ export const authReducer = (prevState, action) => {
 }
 
 export const AuthenticationContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(authReducer, {user: null})
+    const [state, dispatch] = useReducer(authReducer, {globalState: null})
+    
+    // when the application first loads, this effect fires to retrieve localStorage info to update globalState
+    useEffect(() => {
+        const globalState = JSON.parse(localStorage.getItem("globalState"))
 
-    console.log("Authentication state:" + state)
+        if (globalState) {
+            dispatch({type: "LOGIN", payload: globalState})
+        }
+    },[])
+
+    console.log("Authentication state:", state)
 
     return(
         <AuthenticationContext.Provider value={{...state, dispatch}}>
