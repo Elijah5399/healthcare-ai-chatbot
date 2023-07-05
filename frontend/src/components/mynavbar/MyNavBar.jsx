@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { useLogOut } from "../../hooks/useLogOut";
-import { useAuthenticationContext } from "../../context/AuthenticationContext";
+import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
 
 function MyNavBar() {
   const [user, setUser] = useState("");

@@ -1,16 +1,7 @@
 import { createContext, useReducer, useContext, useState, useEffect } from "react";
+import { useAuthenticationContext } from "../hooks/useAuthenticationContext";
 
 export const AuthenticationContext = createContext()
-
-export const useAuthenticationContext = () => {
-    const context = useContext(AuthenticationContext)
-
-    if (!context) {
-        throw Error("useAuthenticationContext must be used inside an AuthenticationContextProvider")
-    }
-
-    return context
-}
 
 export const authReducer = (prevState, action) => {
     switch (action.type) {
@@ -28,7 +19,7 @@ export const authReducer = (prevState, action) => {
 }
 
 export const AuthenticationContextProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(authReducer, {globalState: null})
+    const [state, dispatch] = useReducer(authReducer, { globalState: null })
     
     // when the application first loads, this effect fires to retrieve localStorage info to update globalState
     useEffect(() => {

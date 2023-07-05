@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuthenticationContext } from "../context/AuthenticationContext";
+import { useAuthenticationContext } from "./useAuthenticationContext";
 
 /* Custom SignUp Hook */
 export const useSignUp = () => {

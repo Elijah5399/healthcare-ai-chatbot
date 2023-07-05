@@ -1,4 +1,4 @@
-import { useAuthenticationContext } from "../context/AuthenticationContext"
+import { useAuthenticationContext } from "./useAuthenticationContext";
 
 /* Custom LogOut Hook */
 export const useLogOut = () => {
@@ -6,7 +6,7 @@ export const useLogOut = () => {
 
     const logout = async () => {
         // removing user from localStorage
-        localStorage.removeItem("user")
+        localStorage.removeItem("globalState")
         localStorage.removeItem("name")
         localStorage.removeItem("token")
 
