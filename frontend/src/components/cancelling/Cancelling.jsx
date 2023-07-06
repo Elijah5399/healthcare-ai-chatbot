@@ -2,33 +2,46 @@ import "../../styles/Cancelling.css";
 import { useState, useEffect } from "react";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useAppointmentsContext } from "../../context/AppointmentsContext";
+import { useAuthenticationContext } from "../../hooks/useAuthenticationContext"
 
 export default function Cancelling() {
-  // const[appts, setAppt] = useState(null)
   const { appts, dispatch } = useAppointmentsContext();
+  const { globalState } = useAuthenticationContext()
 
   /* Function to Fetch User's Appointments */
   useEffect(() => {
     const fetchAppts = async () => {
-      const response = await fetch("http://localhost:3000/cancel");
+      const response = await fetch("http://localhost:3000/cancel", {
+        headers: {
+          "Authorization": `Bearer ${globalState.token}`
+        }
+      });
       const json = await response.json(); // array of data
 
       if (response.ok) {
-        // setAppt(json)
         dispatch({ type: "GET_APPOINTMENT", payload: json });
       }
     };
 
-    fetchAppts();
-  }, []);
+    if (globalState) {
+      fetchAppts();
+    }
+  }, [dispatch, globalState]);
 
   function AppointmentDetails({ appt }) {
     const { dispatch } = useAppointmentsContext();
 
     /* Function to Handle Click */
     const handleClick = async () => {
+      if (!globalState) {
+        return
+      }
+
       const response = await fetch("/cancel/" + appt._id, {
         method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${globalState.token}`
+        }
       });
 
       const json = await response.json();

@@ -1,12 +1,19 @@
 const express = require("express")
 const Appointment = require("../models/AppointmentsModel")
 const mongoose = require("mongoose")
+const requireAuthentication = require("../middleware/requireAuthentication")
 
 const router = express.Router()
 
+// require authentication for all cancelling routes
+router.use(requireAuthentication)
+
 /* Handling a GET request (for UI) */
 router.get("/", async (request, response) => {
-    const appts = await Appointment.find({}).sort({createdAt: -1})
+    const user_id = request.user._id
+    console.log(user_id)
+
+    const appts = await Appointment.find({ user_id }).sort({ createdAt: -1 })
 
     response.status(200).json(appts)
 })
