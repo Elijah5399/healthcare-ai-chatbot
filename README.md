@@ -12,9 +12,9 @@ We have created a generic website for hospitals, supporting the functions of boo
 
 - Improve UI
 
-- Ensure that users only see their own appointments
-
 # Recently finished
+
+- Ensure that users only see their own appointments
 
 - Added stripe integration
 
