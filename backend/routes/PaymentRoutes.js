@@ -7,6 +7,10 @@ router.post("/create-checkout-session", async (req, res) => {
   const data = req.body;
   const apptDate = data.date;
   const apptTime = data.time;
+  const token = data.token;
+
+  //console.log(token)
+
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {

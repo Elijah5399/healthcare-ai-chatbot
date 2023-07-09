@@ -11,7 +11,6 @@ router.use(requireAuthentication)
 /* Handling a GET request (for UI) */
 router.get("/", async (request, response) => {
     const user_id = request.user._id
-    console.log(user_id)
 
     const appts = await Appointment.find({ user_id }).sort({ createdAt: -1 })
 

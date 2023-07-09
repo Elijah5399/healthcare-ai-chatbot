@@ -14,8 +14,8 @@ const fulfillOrder = (lineItems) => {
     const parsed = description.split(" ");
     const date = parsed[2];
     const time = parsed[4];
-    //console.log("appt date is: ", date);
-    //console.log("appt time is: ", time);
+    // const token = parsed[6];
+    // console.log(token);
     try {
       const dateTimeString = `${date} ${time}`;
       const epochValue = new Date(dateTimeString).getTime();
@@ -24,6 +24,7 @@ const fulfillOrder = (lineItems) => {
         body: JSON.stringify({ epochValue }),
         headers: {
           "Content-Type": "application/json",
+          // "Authorization": `Bearer ${token}`,
         },
       });
     } catch (err) {
@@ -43,6 +44,7 @@ router.post(
   "/",
   express.raw({ type: "application/json" }),
   async (req, res) => {
+    console.log("webhook hit");
     const payload = req.body;
     const sig = req.headers["stripe-signature"];
     let event;
@@ -57,7 +59,7 @@ router.post(
       console.log(err.message);
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
-    //console.log("Got payload: " + payload);
+
     // Handle the checkout.session.completed event
     if (event.type === "checkout.session.completed") {
       // Retrieve the session. If you require line items in the response, you may include them by expanding line_items.
