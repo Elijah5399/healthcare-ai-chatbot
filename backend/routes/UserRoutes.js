@@ -12,7 +12,7 @@ const createToken = (_id) => {
 /* Login */
 router.post("/login", async (request, response) => {
   const obj = request.body;
-  const name = obj.username;
+  const name = obj.name;
   const password = obj.password;
 
   try {

@@ -6,15 +6,23 @@ import "../../styles/MyNavBar.css";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { useLogOut } from "../../hooks/useLogOut";
+import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
 
 function MyNavBar() {
   const [user, setUser] = useState("");
+  const logout = useLogOut()
+  const { globalState } = useAuthenticationContext()
 
   //on clicking logout button, remove name and token from local storage and remove user
   function handleLogout() {
-    localStorage.removeItem("name");
-    localStorage.removeItem("token");
-    setUser("");
+    logout()
+    setUser("")
+
+    /* Replaced this with the custom hook above */
+    // localStorage.removeItem("name");
+    // localStorage.removeItem("token");
+    // setUser("");
   }
 
   useEffect(() => {

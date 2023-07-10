@@ -7,6 +7,10 @@ const apptSchema = new Schema(
       type: Number, // number of seconds or milliseconds that have elapsed since epoch
       required: true,
     },
+    user_id: {
+      type: String,
+      required: true
+    }
   },
   { timestamps: true }
 );

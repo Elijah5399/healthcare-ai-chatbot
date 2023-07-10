@@ -2,21 +2,41 @@ import "../../styles/Booking.css";
 import { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
 
 export default function Booking() {
   const [submitted, setSubmitted] = useState(false);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+  const [error, setError] = useState("null");
+  const { globalState } = useAuthenticationContext();
 
   const handleSubmit = async (e) => {
-    //e.preventDefault();
+    if (!globalState) {
+      setError("You must be logged in");
+      console.log("ERROR PLS LOGIN");
+      return;
+    }
+
+    // e.preventDefault();
     const date = e.date;
     const time = e.time;
+    const token = globalState.token;
     setDate(date);
     setTime(time);
 
     const dateTimeString = `${date} ${time}`;
     const epochValue = new Date(dateTimeString).getTime();
+
+    /* Testing */
+    // const response = await fetch("/book/submit", {
+    //   method: "POST",
+    //   body: JSON.stringify({epochValue}),
+    //   headers: {
+    //       "Content-Type": "application/json",
+    //       "Authorization": `Bearer ${globalState.token}`
+    //   }
+    // })
 
     setSubmitted(true);
 
@@ -26,6 +46,7 @@ export default function Booking() {
       body: JSON.stringify({ date, time }),
       headers: {
         "Content-Type": "application/json",
+        // "Authorization": `Bearer ${globalState.token}`
       },
     });
 
@@ -39,6 +60,7 @@ export default function Booking() {
       .required("Date cannot be empty"),
     time: Yup.string().required("Time cannot be empty"),
   });
+
   /* UI for Booking Form */
   function Forms() {
     return (

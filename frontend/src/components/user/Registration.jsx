@@ -9,12 +9,12 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import validator from "validator";
 import { useState, useEffect } from "react";
-// import {  useAuthenticationContext } from "../../context/AuthenticationContext";
+import { useSignUp } from "../../hooks/useSignUp";
 
 export default function Registration() {
   //potential errors from server-side validation
   const [error, setError] = useState("");
-  // const { dispatch } = useAuthenticationContext()
+  const signup = useSignUp()
 
   // if user is already logged in, this redirects them to the homepage
   useEffect(() => {
@@ -60,56 +60,31 @@ export default function Registration() {
     const name = e.username;
     const password = e.password;
     const obj = { name, email, password };
+    
+    await signup(name, email, password)
 
-    /* IGNORE THIS */
-    // const response = await fetch("/user/signup", {
+    /* Replaced this entire rubbish with the custom hook above, got some diff but idea same => see useSignUp in hooks folder (fuck you elijah) */
+    // await fetch("/user/signup", {
     //   method: "POST",
     //   body: JSON.stringify(obj),
     //   headers: {
     //     "Content-Type": "application/json",
-    //   }
+    //   },
     // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.error) {
+    //       //if we retrieve any errors we don't redirect, just display the error msg
+    //       setError(data.error);
+    //     } else {
+    //       //retrieve name and token from data, and put in local storage
+    //       localStorage.setItem("name", data.name);
+    //       localStorage.setItem("token", data.token);
 
-    // const json = await response.json()
-
-    // if (!response.ok) {
-    //   setError(json.error)
-    // }
-
-    // if (response.ok) {
-    //   console.log(json)
-
-    //   // retrieve name and token from json, and put in local storage
-    //   localStorage.setItem("user", JSON.stringify(json))
-
-    //   // update authentication context
-    //   dispatch({type: "LOGIN", payload: json})
-
-    //   //if the login is successful, redirect user to main page
-    //   window.location.href = "/";
-    // }
-
-    await fetch("/user/signup", {
-      method: "POST",
-      body: JSON.stringify(obj),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.error) {
-          //if we retrieve any errors we don't redirect, just display the error msg
-          setError(data.error);
-        } else {
-          //retrieve name and token from data, and put in local storage
-          localStorage.setItem("name", data.name);
-          localStorage.setItem("token", data.token);
-
-          //if the login is successful, redirect user to main page
-          window.location.href = "/";
-        }
-      });
+    //       //if the login is successful, redirect user to main page
+    //       window.location.href = "/";
+    //     }
+    //   });
   };
 
   const schema = yup.object().shape({

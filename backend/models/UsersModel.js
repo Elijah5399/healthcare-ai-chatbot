@@ -24,9 +24,7 @@ const userSchema = new Schema(
 );
 
 /* Static Signup Method */
-userSchema.statics.signup = async function (name, email, password) {
-  // creating an additional static method for usersModel that can be used
-
+userSchema.statics.signup = async function (name, email, password) {   // creating an additional static method for usersModel that can be used
   /* Validation Checks */
   if (!email || !password) {
     throw Error("All fields must be filled");
