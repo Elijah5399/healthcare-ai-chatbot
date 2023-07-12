@@ -11,14 +11,13 @@ import * as yup from "yup";
 import { useLogin } from "../../hooks/useLogin";
 
 export default function Login() {
-  //potential errors from server-side validation
+  // potential errors from server-side validation
   const [errors, setErrors] = useState("");
-  const login = useLogin()
+  const login = useLogin();
 
-  //if user is already logged in, this redirects them to the homepage
+  // if user is already logged in, this redirects them to the homepage
   useEffect(() => {
     if (localStorage.name && localStorage.token) {
-      //console.log("token is: " + localStorage.getItem("token"));
       const token = localStorage.getItem("token");
       fetch("/user/verify", {
         method: "POST",
@@ -44,34 +43,7 @@ export default function Login() {
     const password = e.password;
     const obj = { name, password };
 
-    await login(name, password)
-
-    /* All in a day's job, cleaning up elijah's messy code => see useLogin in hooks folder (replaced code below with custom hook above, got some diff but idea same) */
-    // //submit a post request to the backend API endpoint
-    // await fetch("/user/login", {
-    //   method: "POST",
-    //   body: JSON.stringify(obj),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.error) {
-    //       //if we retrieve any errors we don't redirect, just display the error msg
-    //       setErrors(data.error);
-    //     } else {
-    //       //retrieve name and token from data, and put in local storage
-    //       localStorage.setItem("name", data.name);
-    //       localStorage.setItem("token", data.token);
-
-    //       // update authentication context
-    //       // dispatch({type: "LOGIN", payload: json})
-
-    //       //redirect user to home page
-    //       window.location.href = "/";
-    //     }
-    //   }); // Note that both 200 and 400 statuses do not produce errors
+    await login(name, password);
   };
 
   const schema = yup.object().shape({

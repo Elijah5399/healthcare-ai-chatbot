@@ -14,8 +14,8 @@ const fulfillOrder = (lineItems) => {
     const parsed = description.split(" ");
     const date = parsed[2];
     const time = parsed[4];
-    // const token = parsed[6];
-    // console.log(token);
+    const token = parsed[6];
+
     try {
       const dateTimeString = `${date} ${time}`;
       const epochValue = new Date(dateTimeString).getTime();
@@ -24,7 +24,7 @@ const fulfillOrder = (lineItems) => {
         body: JSON.stringify({ epochValue }),
         headers: {
           "Content-Type": "application/json",
-          // "Authorization": `Bearer ${token}`,
+          "Authorization": `Bearer ${token}`,
         },
       });
     } catch (err) {
