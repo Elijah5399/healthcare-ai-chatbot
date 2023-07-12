@@ -11,6 +11,27 @@ export default function Booking() {
   const [error, setError] = useState("null");
   const { globalState } = useAuthenticationContext();
 
+  useEffect(() => {
+    if (localStorage.name && localStorage.token) {
+      const token = localStorage.getItem("token");
+      fetch("/user/verify", {
+        method: "POST",
+        body: JSON.stringify({ token: token }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          // do nothing
+        } else {
+          window.location.href = "/login";
+        }
+      });
+    } else {
+      window.location.href = "/login";
+    }
+  });
+
   const handleSubmit = async (e) => {
     if (!globalState) {
       setError("You must be logged in");
@@ -59,27 +80,6 @@ export default function Booking() {
       .min(new Date() + 86400000, "Invalid date")
       .required("Date cannot be empty"),
     time: Yup.string().required("Time cannot be empty"),
-  });
-
-  useEffect(() => {
-    if (localStorage.name && localStorage.token) {
-      const token = localStorage.getItem("token");
-      fetch("/user/verify", {
-        method: "POST",
-        body: JSON.stringify({ token: token }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        if (res.status === 200) {
-          // do nothing
-        } else {
-          window.location.href = "/login";
-        }
-      });
-    } else {
-      window.location.href = "/login";
-    }
   });
 
   /* UI for Booking Form */
