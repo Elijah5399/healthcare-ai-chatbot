@@ -14,6 +14,7 @@ const cancellingRoutes = require("./routes/CancellingRoutes");
 const userRoutes = require("./routes/UserRoutes");
 const paymentRoutes = require("./routes/PaymentRoutes");
 const webhookRoutes = require("./routes/Webhook");
+const botRoutes = require("./routes/ChatbotRoutes");
 
 /* Webhook route needs to come before app.use(express.json()) */
 expressApp.use("/webhook", webhookRoutes);
@@ -28,6 +29,7 @@ expressApp.use("/book", bookingRoutes); // this route will only be used when url
 expressApp.use("/cancel", cancellingRoutes);
 expressApp.use("/user", userRoutes);
 expressApp.use("/payment", paymentRoutes);
+expressApp.use("/bot", botRoutes);
 
 /* Connecting to DB */
 mongoose
