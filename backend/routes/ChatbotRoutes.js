@@ -42,6 +42,4 @@ async function ask(qn) {
   return response;
 }
 
-ask("hi");
-
 module.exports = router;
