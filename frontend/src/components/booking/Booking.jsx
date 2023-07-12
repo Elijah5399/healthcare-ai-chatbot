@@ -31,7 +31,6 @@ export default function Booking() {
       window.location.href = "/login";
     }
   });
-
   const handleSubmit = async (e) => {
     if (!globalState) {
       setError("You must be logged in");

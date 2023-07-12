@@ -12,14 +12,22 @@ export default function Chatbot() {
     { status: "sent", content: "Hello World!" },
   ]);
   const [input, setInput] = useState("");
-  const handleKeyDown = (e) => {
+  const handleKeyDown = async (e) => {
     if (e.key === "Enter") {
-      //TODO: Enter a query to the dialogflow API with the value of input
-
+      var sentence = document.getElementById("sentence").value;
+      console.log(sentence);
       //add a new outgoing message to the chatbox
       setMessages([...messages, { status: "sent", content: input }]);
       //console.log("input is: " + input);
       setInput("");
+      const reply = await fetch(
+        `/bot/query?${new URLSearchParams({
+          input: sentence,
+        })}`
+      );
+      const json = await reply.json();
+
+      console.log("reply is: " + json.answer);
     }
   };
   const handleChange = (e) => {
@@ -77,6 +85,7 @@ export default function Chatbot() {
                 value={input}
                 onKeyDown={handleKeyDown}
                 onChange={handleChange}
+                id="sentence"
               />
             </div>
           </div>
