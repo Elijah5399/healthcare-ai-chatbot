@@ -9,8 +9,12 @@ import Login from "./components/user/Login";
 import Registration from "./components/user/Registration";
 import { PaymentSuccess, PaymentCancel } from "./components/payments/Payments";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import { useAuthenticationContext } from "./hooks/useAuthenticationContext";
 
 function App() {
+  const { globalState } = useAuthenticationContext();
+
   return (
     <div className="app">
       <div className="nav">
@@ -24,7 +28,7 @@ function App() {
 
             <Route path="/book" element={<Booking />} />
 
-            <Route path="cancel" element={<Cancelling />} />
+            <Route path="/cancel" element={<Cancelling />} />
 
             <Route path="/contact" element={<Contact />} />
 

@@ -1,5 +1,5 @@
 import "../../styles/Booking.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
@@ -10,6 +10,7 @@ export default function Booking() {
   const [time, setTime] = useState("");
   const [error, setError] = useState("null");
   const { globalState } = useAuthenticationContext();
+
 
   const handleSubmit = async (e) => {
     if (!globalState) {
@@ -43,10 +44,10 @@ export default function Booking() {
     /* submitting a POST request */
     const res = await fetch("/payment/create-checkout-session", {
       method: "POST",
-      body: JSON.stringify({ date, time }),
+      body: JSON.stringify({ date, time, token }),
       headers: {
         "Content-Type": "application/json",
-        // "Authorization": `Bearer ${globalState.token}`
+        "Authorization": `Bearer ${globalState.token}`
       },
     });
 
@@ -129,11 +130,7 @@ export default function Booking() {
       </>
     );
   }
-  /*
-        <form action="/payment/create-checkout-session" method="POST">
-        <button type="submit">Checkout</button>
-      </form>
-      */
+
   /* UI for acknowleding Submission */
   function Submit() {
     return (

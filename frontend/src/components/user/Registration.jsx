@@ -62,29 +62,6 @@ export default function Registration() {
     const obj = { name, email, password };
     
     await signup(name, email, password)
-
-    /* Replaced this entire rubbish with the custom hook above, got some diff but idea same => see useSignUp in hooks folder (fuck you elijah) */
-    // await fetch("/user/signup", {
-    //   method: "POST",
-    //   body: JSON.stringify(obj),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.error) {
-    //       //if we retrieve any errors we don't redirect, just display the error msg
-    //       setError(data.error);
-    //     } else {
-    //       //retrieve name and token from data, and put in local storage
-    //       localStorage.setItem("name", data.name);
-    //       localStorage.setItem("token", data.token);
-
-    //       //if the login is successful, redirect user to main page
-    //       window.location.href = "/";
-    //     }
-    //   });
   };
 
   const schema = yup.object().shape({
