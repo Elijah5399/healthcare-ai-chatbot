@@ -2,19 +2,19 @@ import "../../styles/Cancelling.css";
 import { useState, useEffect } from "react";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useAppointmentsContext } from "../../context/AppointmentsContext";
-import { useAuthenticationContext } from "../../hooks/useAuthenticationContext"
+import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
 
 export default function Cancelling() {
   const { appts, dispatch } = useAppointmentsContext();
-  const { globalState } = useAuthenticationContext()
+  const { globalState } = useAuthenticationContext();
 
   /* Function to Fetch User's Appointments */
   useEffect(() => {
     const fetchAppts = async () => {
       const response = await fetch("http://localhost:3000/cancel", {
         headers: {
-          "Authorization": `Bearer ${globalState.token}`
-        }
+          Authorization: `Bearer ${globalState.token}`,
+        },
       });
       const json = await response.json(); // array of data
 
@@ -28,20 +28,41 @@ export default function Cancelling() {
     }
   }, [dispatch, globalState]);
 
+  useEffect(() => {
+    if (localStorage.name && localStorage.token) {
+      const token = localStorage.getItem("token");
+      fetch("/user/verify", {
+        method: "POST",
+        body: JSON.stringify({ token: token }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+        if (res.status === 200) {
+          // do nothing
+        } else {
+          window.location.href = "/login";
+        }
+      });
+    } else {
+      window.location.href = "/login";
+    }
+  });
+
   function AppointmentDetails({ appt }) {
     const { dispatch } = useAppointmentsContext();
 
     /* Function to Handle Click */
     const handleClick = async () => {
       if (!globalState) {
-        return
+        return;
       }
 
       const response = await fetch("/cancel/" + appt._id, {
         method: "DELETE",
         headers: {
-          "Authorization": `Bearer ${globalState.token}`
-        }
+          Authorization: `Bearer ${globalState.token}`,
+        },
       });
 
       const json = await response.json();
