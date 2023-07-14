@@ -11,9 +11,7 @@ export default function Homepage() {
           <h1>Talk to SGH's ChatBot!</h1>
         </div>
 
-        <body>
-          <Chatbot />
-        </body>
+        <Chatbot />
       </div>
     </>
   );

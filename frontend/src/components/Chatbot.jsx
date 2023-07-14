@@ -10,24 +10,42 @@ export default function Chatbot() {
   const [messages, setMessages] = useState([
     { status: "received", content: "Hello Elijah" },
     { status: "sent", content: "Hello World!" },
+    //{ status: "sent", content: "hi" },
+    //{ status: "received", content: "Hello there!" },
   ]);
   const [input, setInput] = useState("");
+  /*
+  const updateMessages = (msg) => {
+    setMessages([...messages, msg]);
+  };
+  */
   const handleKeyDown = async (e) => {
     if (e.key === "Enter") {
-      var sentence = document.getElementById("sentence").value;
-      console.log(sentence);
+      //var sentence = document.getElementById("sentence").value;
+      console.log("input is: " + input);
       //add a new outgoing message to the chatbox
-      setMessages([...messages, { status: "sent", content: input }]);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { status: "sent", content: input },
+      ]);
       //console.log("input is: " + input);
       setInput("");
-      const reply = await fetch(
+      var reply = await fetch(
         `/bot/query?${new URLSearchParams({
-          input: sentence,
+          input: input,
         })}`
       );
-      const json = await reply.json();
+      var json = await reply.json();
+      var answer = json.answer;
+      if (!answer) {
+        answer = "I didn't understand that. Could you rephrase?";
+      }
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { status: "received", content: answer },
+      ]);
 
-      console.log("reply is: " + json.answer);
+      //console.log("reply is: " + json.answer);
     }
   };
   const handleChange = (e) => {
@@ -51,9 +69,9 @@ export default function Chatbot() {
           <div className="chats">
             <div className="msg-page">
               {/* Contains Incoming & Outgoing Messages */}
-              {messages.map((message) => {
+              {messages.map((message, index) => {
                 return message.status === "received" ? (
-                  <div className="received-chats">
+                  <div className="received-chats" key={index}>
                     <img className="received-chats-img" src={ChatbotLogo} />
                     <div className="received-msg">
                       <div className="received-msg-inbox">
@@ -62,7 +80,7 @@ export default function Chatbot() {
                     </div>
                   </div>
                 ) : (
-                  <div className="outgoing-chats">
+                  <div className="outgoing-chats" key={index}>
                     <div className="outgoing-msg">
                       <div className="outgoing-chats-msg">
                         <p>{message.content}</p>
