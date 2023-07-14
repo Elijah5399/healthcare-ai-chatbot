@@ -11,9 +11,7 @@ router.get("/query", async (req, res) => {
 
 const manager = new NlpManager({ languages: ["en"], forceNER: true });
 
-manager.load(
-  "/Users/elijahchia/Documents/SummerTechFest/healthcare-ai-chatbot/backend/routes/model.nlp"
-);
+manager.load("./routes/model.nlp");
 
 // Adds the utterances and intents for the NLP
 /*

@@ -43,7 +43,7 @@ mongoose
       console.log("connected to db and listening on port 3001");
     })
   )
-  .catch((error) => console.log(error));
+  .catch((error) => console.log("Error connecting to database: " + error));
 
 /* Elijah's Nonsense */
 expressApp.get("/askQn", (req, res) => {
