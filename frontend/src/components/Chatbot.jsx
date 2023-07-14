@@ -10,18 +10,12 @@ export default function Chatbot() {
   const [messages, setMessages] = useState([
     { status: "received", content: "Hello Elijah" },
     { status: "sent", content: "Hello World!" },
-    //{ status: "sent", content: "hi" },
-    //{ status: "received", content: "Hello there!" },
   ]);
+
   const [input, setInput] = useState("");
-  /*
-  const updateMessages = (msg) => {
-    setMessages([...messages, msg]);
-  };
-  */
+
   const handleKeyDown = async (e) => {
     if (e.key === "Enter") {
-      //var sentence = document.getElementById("sentence").value;
       console.log("input is: " + input);
       //add a new outgoing message to the chatbox
       setMessages((prevMessages) => [
