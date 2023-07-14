@@ -8,16 +8,12 @@ We have created a generic website for hospitals, supporting the functions of boo
 
 # TODO
 
-- Create chatbot
+- Ensure our chatbot has more than 3 brain cells
 
 - Improve UI
 
 # Recently finished
 
+- Created chatbot
+
 - Ensure that users only see their own appointments
-
-- Added stripe integration
-
-- Added stripe webhook. When payment is successfully made, the webhook is triggered and an appointment is created in the database.
-
-- Added cancelling appointment feature
