@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const executeQueries = require("./dialogflow");
 require("dotenv").config();
 const User = require("./models/UsersModel");
 const Appointment = require("./models/AppointmentsModel");
@@ -44,13 +43,3 @@ mongoose
     })
   )
   .catch((error) => console.log("Error connecting to database: " + error));
-
-/* Elijah's Nonsense */
-expressApp.get("/askQn", (req, res) => {
-  executeQueries(
-    process.env.PROJECT_ID,
-    123456,
-    ["what time are you open?"],
-    "en"
-  ).then((ans) => res.send(ans));
-});
