@@ -12,8 +12,10 @@ We have created a generic website for hospitals, supporting the functions of boo
 
 - Improve UI
 
+- Deploy using docker container
+
 # Recently finished
 
 - Created chatbot
 
-- Ensure that users only see their own appointments
+- Containerised application
