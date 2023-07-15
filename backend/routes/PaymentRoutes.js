@@ -7,7 +7,8 @@ router.post("/create-checkout-session", async (req, res) => {
   const data = req.body;
   const apptDate = data.date;
   const apptTime = data.time;
-  const token = data.token
+  const token = data.token;
+  const name = data.name;
 
   const session = await stripe.checkout.sessions.create({
     line_items: [
@@ -15,7 +16,7 @@ router.post("/create-checkout-session", async (req, res) => {
         price_data: {
           currency: "sgd",
           product_data: {
-            name: `Appointment on ${apptDate} at ${apptTime} for ${token}`,
+            name: `Appointment on ${apptDate} at ${apptTime} for ${name}`,
           },
           unit_amount: 100,
         },
@@ -25,6 +26,9 @@ router.post("/create-checkout-session", async (req, res) => {
     mode: "payment",
     success_url: "http://localhost:3000/payment/success",
     cancel_url: `http://localhost:3000/payment/cancel`,
+    metadata: {
+      token: `${token}`,
+    }, //store the token in the session's metadata
   });
 
   res.json({ url: session.url });
