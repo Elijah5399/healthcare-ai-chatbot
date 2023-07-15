@@ -10,8 +10,7 @@ router.get("/query", async (req, res) => {
 
 const manager = new NlpManager({ languages: ["en"], forceNER: true });
 
-// manager.load("/Users/elijahchia/Documents/SummerTechFest/healthcare-ai-chatbot/backend/routes/model.nlp");
-manager.load("/Users/gohtengfong/Desktop/Projects/healthcare-ai-chatbot/backend/routes/model.nlp")
+manager.load("./routes/model.nlp");
 
 /*
 
@@ -58,7 +57,6 @@ manager.train()
 manager.save()
 
 */
-
 
 async function ask(qn) {
   const response = await manager.process("en", qn);
