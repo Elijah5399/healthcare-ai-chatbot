@@ -1,21 +1,34 @@
 # Healthcare-AI-ChatBot
 
-Technologies used : MERN stack
+Using the MERN stack, We have created a generic website for hospitals, supporting the functions of booking and cancelling appointments and paying for bookings, as well as user logins and registrations. We also have a chatbot available for all users to interact with in the homepage, which guides users on how to use the app's features.
 
-# What it does
+## How to use
 
-We have created a generic website for hospitals, supporting the functions of booking and cancelling appointments and paying for bookings, as well as user logins and registrations.
+If you're assessing our project and reading this, chances are that we've already deployed our container onto EC2 and made it publicly accessible. You can simply view the web app from there!
 
-# TODO
+If you're trying to run our web app locally, this will be challenging since the .env files are not included on github. You will need to do the following:
 
-- Ensure our chatbot has more than 3 brain cells
+    1. Create a .env file in the root folder. To it, add STRIPE_KEY with the value of your stripe project's private key.
 
-- Improve UI
+    2. Create a .env file in the backend folder. To it, add:
+        - PROJECT_ID
+        - MONGO_URI
+        - SECRET (for your MongoDB Atlas)
+        - STRIPE_KEY
+        - ENDPOINT_SECRET for stripe
 
-- Deploy using docker container
+    3. Ensure you have docker and docker compose.
 
-# Recently finished
+    4. Access the project root folder using the terminal. Use the command `docker-compose build` followed by `docker-compose up` to get the stripe, backend and frontend services up all at once.
 
-- Created chatbot
+    5. Go to localhost:3000 to see the web app. You're all set! :+1:
 
-- Containerised application
+## Checklist
+
+- [x] Containerise application
+
+- [ ] Ensure our chatbot has more than 3 brain cells
+
+- [ ] Improve UI
+
+- [ ] Deploy container onto AWS EC2
