@@ -1,12 +1,18 @@
 version: "3"
 
 services:
+  stripe-cli:
+    image: stripe/stripe-cli
+    container_name: stripe-cli
+    command: "listen --api-key ${STRIPE_KEY} --forward-to server:3001/webhook"
   server:
     build:
       context: "./backend"
       dockerfile: ./Dockerfile
     ports:
       - "3001:3001"
+    environment:
+      - TZ=Asia/Singapore
   client:
     build:
       context: "./frontend"
@@ -15,3 +21,5 @@ services:
       - "3000:3000"
     links:
       - "server"
+    environment:
+      - TZ=Asia/Singapore

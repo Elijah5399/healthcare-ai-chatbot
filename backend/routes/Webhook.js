@@ -4,7 +4,7 @@ const Appointment = require("../models/AppointmentsModel");
 const router = express.Router();
 
 //TODO: Attach the appointment to the specified user
-const fulfillOrder = (lineItems) => {
+const fulfillOrder = (lineItems, token) => {
   console.log("Fulfilling order", lineItems);
   const data = lineItems.data;
   //const epochValue = Date.now();
@@ -14,7 +14,7 @@ const fulfillOrder = (lineItems) => {
     const parsed = description.split(" ");
     const date = parsed[2];
     const time = parsed[4];
-    const token = parsed[6];
+    console.log("token is: " + token);
 
     try {
       const dateTimeString = `${date} ${time}`;
@@ -24,7 +24,7 @@ const fulfillOrder = (lineItems) => {
         body: JSON.stringify({ epochValue }),
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
     } catch (err) {
@@ -70,9 +70,10 @@ router.post(
         }
       );
       const lineItems = sessionWithLineItems.line_items;
+      const token = event.data.object.metadata.token; //retrieve the token stored in the session's metadata
 
       // Fulfill the purchase...
-      fulfillOrder(lineItems);
+      fulfillOrder(lineItems, token);
     }
     res.status(200).end();
   }

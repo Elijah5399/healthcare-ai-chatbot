@@ -42,6 +42,7 @@ export default function Booking() {
     const date = e.date;
     const time = e.time;
     const token = globalState.token;
+    const name = localStorage.name;
     setDate(date);
     setTime(time);
 
@@ -63,7 +64,7 @@ export default function Booking() {
     /* submitting a POST request */
     const res = await fetch("/payment/create-checkout-session", {
       method: "POST",
-      body: JSON.stringify({ date, time, token }),
+      body: JSON.stringify({ date, time, token, name }),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${globalState.token}`,
