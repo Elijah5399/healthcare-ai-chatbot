@@ -11,18 +11,13 @@ import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
 
 function MyNavBar() {
   const [user, setUser] = useState("");
-  const logout = useLogOut()
-  const { globalState } = useAuthenticationContext()
+  const logout = useLogOut();
+  const { globalState } = useAuthenticationContext();
 
   //on clicking logout button, remove name and token from local storage and remove user
   function handleLogout() {
-    logout()
-    setUser("")
-
-    /* Replaced this with the custom hook above */
-    // localStorage.removeItem("name");
-    // localStorage.removeItem("token");
-    // setUser("");
+    logout();
+    setUser("");
   }
 
   useEffect(() => {
@@ -58,6 +53,13 @@ function MyNavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
+            <Nav.Link
+              href="/chatbot"
+              className="options"
+              style={{ width: "200px" }}
+            >
+              Talk to Us!
+            </Nav.Link>
             <Nav.Link
               href="/book"
               className="options"

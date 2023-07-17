@@ -1,6 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import MyNavBar from "./components/mynavbar/MyNavBar";
+import Chatbot from "./components/chatbot/Chatbot";
 import Homepage from "./components/homepage/Homepage";
 import Booking from "./components/booking/Booking";
 import Cancelling from "./components/cancelling/Cancelling";
@@ -25,6 +26,8 @@ function App() {
         <div className="pages">
           <Routes>
             <Route path="/" element={<Homepage />} />
+
+            <Route path="chatbot" element={<Chatbot />} />
 
             <Route path="/book" element={<Booking />} />
 
