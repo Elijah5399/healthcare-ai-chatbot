@@ -1,7 +1,7 @@
 # Healthcare-AI-ChatBot
 
 ## Project Structure
-<img width="1500" alt="healthcare chatbot diag" src="https://github.com/Elijah5399/healthcare-ai-chatbot/assets/22656175/d6e8432b-15ff-4fd6-a8f9-95489fc122c0">
+<img width="500" alt="healthcare chatbot diag (2)" src="https://github.com/Elijah5399/healthcare-ai-chatbot/assets/22656175/f17ca614-ef8a-4616-8275-9d5c56a63cf0">
 
 ## Project Description
 
@@ -9,7 +9,7 @@ Using the MERN stack, We have created a generic website for hospitals, supportin
 
 ## How to use
 
-If you're assessing our project and reading this, chances are that we've already deployed our container onto EC2 and made it publicly accessible. You can simply view the web app from there!
+If you're assessing our project and reading this, chances are that we've already deployed our container onto an online server and made it publicly accessible. You can simply view the web app from there!
 
 If you're trying to run our web app locally, this will be challenging since the .env files are not included on github. You will need to do the following:
 
@@ -32,8 +32,10 @@ If you're trying to run our web app locally, this will be challenging since the 
 
 - [x] Containerise application
 
+- [x] Deploy container onto an online server
+
 - [ ] Ensure our chatbot has more than 3 brain cells
 
 - [ ] Improve UI
 
-- [ ] Deploy container onto AWS EC2
+
