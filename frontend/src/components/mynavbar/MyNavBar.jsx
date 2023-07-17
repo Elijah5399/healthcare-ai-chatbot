@@ -1,11 +1,11 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import SGHLogo from "../../images/SGH-logo.png";
 import "../../styles/MyNavBar.css";
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRightFromBracket,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
 import { useLogOut } from "../../hooks/useLogOut";
 import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
 
@@ -13,11 +13,16 @@ function MyNavBar() {
   const [user, setUser] = useState("");
   const logout = useLogOut();
   const { globalState } = useAuthenticationContext();
+  const [dropdown, setdropdown] = useState(false);
 
   //on clicking logout button, remove name and token from local storage and remove user
   function handleLogout() {
     logout();
     setUser("");
+  }
+
+  function dropdownhandler() {
+    setdropdown(!dropdown);
   }
 
   useEffect(() => {
@@ -45,62 +50,85 @@ function MyNavBar() {
   });
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary" style={{ width: "100vw" }}>
-      <Container className="container">
-        <Navbar.Brand as="a" href="/">
-          <img className="sghlogo" src={SGHLogo} alt="SGH" />
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link
-              href="/chatbot"
-              className="options"
-              style={{ width: "200px" }}
-            >
-              Talk to Us!
-            </Nav.Link>
-            <Nav.Link
-              href="/book"
-              className="options"
-              style={{ width: "300px" }}
-            >
-              Book an Appointment
-            </Nav.Link>
-            <Nav.Link
-              href="/cancel"
-              className="options"
-              style={{ width: "320px" }}
-            >
-              Cancel an Appointment
-            </Nav.Link>
-            <Nav.Link
-              href="/contact"
-              className="options"
-              style={{ width: "250px" }}
-            >
-              Contact Us
-            </Nav.Link>
-          </Nav>
+    <div className="navbarWrapper">
+      <nav className="container">
+        <div>
+          <a href="/">
+            <img className="sghlogo" src={SGHLogo} alt="SGH" />
+          </a>
+        </div>
+        <ul className="large">
+          <li>
+            <a href="/chatbot">Talk to Us!</a>
+          </li>
+          <li>
+            <a href="/book">Book Appointment</a>
+          </li>
+          <li>
+            <a href="/cancel">Cancel Appointment</a>
+          </li>
+          <li>
+            <a href="/contact">Contact Us</a>
+          </li>
+        </ul>
+      </nav>
+      <div className="loginNavWrapper">
+        {user ? (
+          <button className="logoutIconWrapperLarge" onClick={handleLogout}>
+            <p>{user}</p>
+            <FontAwesomeIcon
+              icon={faArrowRightFromBracket}
+              size="lg"
+              className="logoutIcon"
+            />
+          </button>
+        ) : (
+          <button className="loginButton">
+            <a href="/login">Login</a>
+          </button>
+        )}
+      </div>
+
+      {/* below code is for smaller screens */}
+      <div className="hamburgerIcon">
+        <button id="hamburgerbutton" onClick={dropdownhandler}>
+          <FontAwesomeIcon icon={faBars} size={"2x"} />
+        </button>
+      </div>
+      <div className={dropdown ? "dropdown" : "dropdown-hidden"}>
+        {/* Changes to dropdown when button is clicked */}
+        <ul className="small">
+          <li>
+            <a href="/chatbot">Talk to Us!</a>
+          </li>
+          <li>
+            <a href="/book">Book Appointment</a>
+          </li>
+          <li>
+            <a href="/cancel">Cancel Appointment</a>
+          </li>
+          <li>
+            <a href="/contact">Contact Us</a>
+          </li>
+        </ul>
+        <div className="loginWrapperSmall">
           {user ? (
-            <Navbar.Text className="options">
-              {user}
-              <button className="logoutIconWrapper" onClick={handleLogout}>
-                <FontAwesomeIcon
-                  icon={faArrowRightFromBracket}
-                  size="lg"
-                  className="logoutIcon"
-                />
-              </button>
-            </Navbar.Text>
+            <button className="logoutIconWrapperSmall" onClick={handleLogout}>
+              <p>{user}</p>
+              <FontAwesomeIcon
+                icon={faArrowRightFromBracket}
+                size="lg"
+                className="logoutIcon"
+              />
+            </button>
           ) : (
-            <Nav.Link href="/login" className="options">
-              Login
-            </Nav.Link>
+            <button className="loginButtonSmall">
+              <a href="/login">Login</a>
+            </button>
           )}
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+        </div>
+      </div>
+    </div>
   );
 }
 
