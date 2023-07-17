@@ -1,6 +1,7 @@
-import ChatbotLogo from "../images/chatbot-logo.png";
+import "../../styles/Chatbot.css";
+import ChatbotLogo from "../../images/chatbot-logo.png";
 import { useState } from "react";
-import userIcon from "../images/profileIcon2.jpeg";
+import userIcon from "../../images/profileIcon2.jpeg";
 
 export default function Chatbot() {
   {
@@ -46,8 +47,13 @@ export default function Chatbot() {
     setInput(e.target.value);
   };
   var shownMessages;
+
   return (
     <div className="chatbotContainer">
+      <div className="header">
+        <h1>Talk to SGH's ChatBot!</h1>
+      </div>
+
       {/* Message Header Section */}
       <div className="msg-header">
         <div className="container1">

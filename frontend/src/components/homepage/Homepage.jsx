@@ -1,17 +1,20 @@
 import "../../styles/Homepage.css";
-import Chatbot from "../Chatbot";
 import Banner from "./Banner";
+import Vivian from "../../images/Vivian.png";
 
 export default function Homepage() {
   return (
     <>
       <div className="homepageWrapper">
-        <div className="homepageText">
-          <Banner />
-          <h1>Talk to SGH's ChatBot!</h1>
+        <div className="homepageContainer">
+          <div className="homepageIntro">
+            
+          </div>
+          <div className="vivian">
+            <img className="" src={Vivian} />
+          </div>
+          {/* <Banner /> */}
         </div>
-
-        <Chatbot />
       </div>
     </>
   );

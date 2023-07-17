@@ -3,7 +3,6 @@ const express = require("express");
 const Appointment = require("../models/AppointmentsModel");
 const router = express.Router();
 
-//TODO: Attach the appointment to the specified user
 const fulfillOrder = (lineItems, token) => {
   console.log("Fulfilling order", lineItems);
   const data = lineItems.data;
