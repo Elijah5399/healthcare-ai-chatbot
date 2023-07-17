@@ -1,7 +1,7 @@
 # Healthcare-AI-ChatBot
 
 ## Project Structure
-<img width="500" alt="healthcare chatbot diag (2)" src="https://github.com/Elijah5399/healthcare-ai-chatbot/assets/22656175/f17ca614-ef8a-4616-8275-9d5c56a63cf0">
+<img width="800" alt="healthcare chatbot diag (2)" src="https://github.com/Elijah5399/healthcare-ai-chatbot/assets/22656175/f17ca614-ef8a-4616-8275-9d5c56a63cf0">
 
 ## Project Description
 
