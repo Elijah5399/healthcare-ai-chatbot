@@ -11,7 +11,7 @@ export default function Cancelling() {
   /* Function to Fetch User's Appointments */
   useEffect(() => {
     const fetchAppts = async () => {
-      const response = await fetch("http://localhost:3000/cancel", {
+      const response = await fetch("/cancel", {
         headers: {
           Authorization: `Bearer ${globalState.token}`,
         },
