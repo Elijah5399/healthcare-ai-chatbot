@@ -1,32 +1,38 @@
 .contactpageWrapper {
-    text-align: center;
+  text-align: center;
 }
 
 .contactpageText {
-    margin-top: 1.5em;
-    padding-bottom: 1.5em;
-    border-bottom: 4px solid #16ab50;
+  margin-top: 1.5em;
+  padding-bottom: 1.5em;
+  border-bottom: 4px solid #16ab50;
 }
 
 .contactpageInfo {
-    text-align: left !important;
-    margin-left: 100px;
-    margin-top: 50px;
+  text-align: left !important;
+  margin-left: 100px;
+  margin-top: 50px;
 }
 
 .address {
-    margin-bottom: 3em;
+  margin-bottom: 3em;
 }
 
 .sghMap {
-    height: 70%;
-    width: 70%;
+  height: 70%;
+  width: 70%;
 }
 
 .contacts {
-    margin-bottom: 3em;
+  margin-bottom: 3em;
 }
 
 img {
-    margin: 5px;
+  margin: 5px;
+}
+
+@media (max-width: 800px) {
+  .contactpageInfo {
+    margin-left: 5px;
+  }
 }

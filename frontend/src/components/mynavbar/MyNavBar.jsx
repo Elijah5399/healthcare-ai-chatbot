@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightFromBracket,
   faBars,
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { useLogOut } from "../../hooks/useLogOut";
 import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
@@ -92,17 +93,26 @@ function MyNavBar() {
             />
           </button>
         ) : (
-          <button className="loginButton">
-            <a href="/login">Login</a>
-          </button>
+          <Link
+            to="/login"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <button className="loginButton">Login</button>
+          </Link>
         )}
       </div>
 
       {/* below code is for smaller screens */}
       <div className="hamburgerIcon">
-        <button id="hamburgerbutton" onClick={dropdownhandler}>
-          <FontAwesomeIcon icon={faBars} size={"2x"} />
-        </button>
+        {dropdown ? (
+          <button id="hamburgerbutton" onClick={dropdownhandler}>
+            <FontAwesomeIcon icon={faX} size={"2x"} />
+          </button>
+        ) : (
+          <button id="hamburgerbutton" onClick={dropdownhandler}>
+            <FontAwesomeIcon icon={faBars} size={"2x"} />
+          </button>
+        )}
       </div>
       <div className={dropdown ? "dropdown" : "dropdown-hidden"}>
         {/* Changes to dropdown when button is clicked */}
@@ -139,14 +149,12 @@ function MyNavBar() {
               />
             </button>
           ) : (
-            <button className="loginButtonSmall">
-              <Link
-                to="/login"
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                Login
-              </Link>
-            </button>
+            <Link
+              to="/login"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <button className="loginButtonSmall">Login</button>
+            </Link>
           )}
         </div>
       </div>

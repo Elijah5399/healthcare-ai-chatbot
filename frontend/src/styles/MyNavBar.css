@@ -162,4 +162,8 @@ ul.large {
     margin-right: 10px;
     font-size: inherit;
   }
+  #hamburgerbutton {
+    background: none;
+    border: none;
+  }
 }
