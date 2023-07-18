@@ -63,12 +63,7 @@ ul.large {
   flex-direction: row;
   padding-top: 15px;
 }
-li > a {
-  text-decoration: none;
-  color: #4b5563;
-  font-size: 20px;
-  padding-right: 35px;
-}
+
 li > a:hover {
   color: #1f2937;
 }
@@ -144,10 +139,6 @@ li > a:hover {
     width: 150px;
     height: 50px;
     font-size: 20px;
-  }
-  .loginButtonSmall > a {
-    text-decoration: none;
-    color: inherit;
   }
   .logoutIconWrapperSmall {
     display: flex;

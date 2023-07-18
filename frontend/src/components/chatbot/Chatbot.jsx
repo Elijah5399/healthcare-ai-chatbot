@@ -52,6 +52,11 @@ export default function Chatbot() {
     <div className="chatbotContainer">
       <div className="header">
         <h1>Talk to SGH's ChatBot!</h1>
+        <h3>Ask me anything! </h3>
+        <h3>
+          I can help you navigate this webpage and assist you in making bookings
+          and cancellations!
+        </h3>
       </div>
 
       {/* Message Header Section */}

@@ -8,6 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useLogOut } from "../../hooks/useLogOut";
 import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
+import { Link } from "react-router-dom";
 
 function MyNavBar() {
   const [user, setUser] = useState("");
@@ -53,22 +54,62 @@ function MyNavBar() {
     <div className="navbarWrapper">
       <nav className="container">
         <div>
-          <a href="/">
+          <Link to="/">
             <img className="sghlogo" src={SGHLogo} alt="SGH" />
-          </a>
+          </Link>
         </div>
         <ul className="large">
           <li>
-            <a href="/chatbot">Talk to Us!</a>
+            <Link
+              to="/chatbot"
+              style={{
+                textDecoration: "none",
+                color: "#4b5563",
+                fontSize: "20px",
+                paddingRight: "35px",
+              }}
+            >
+              Talk to Us!
+            </Link>
           </li>
           <li>
-            <a href="/book">Book Appointment</a>
+            <Link
+              to="/book"
+              style={{
+                textDecoration: "none",
+                color: "#4b5563",
+                fontSize: "20px",
+                paddingRight: "35px",
+              }}
+            >
+              Book Appointment
+            </Link>
           </li>
           <li>
-            <a href="/cancel">Cancel Appointment</a>
+            <Link
+              to="/cancel"
+              style={{
+                textDecoration: "none",
+                color: "#4b5563",
+                fontSize: "20px",
+                paddingRight: "35px",
+              }}
+            >
+              Cancel Appointment
+            </Link>
           </li>
           <li>
-            <a href="/contact">Contact Us</a>
+            <Link
+              to="/contact"
+              style={{
+                textDecoration: "none",
+                color: "#4b5563",
+                fontSize: "20px",
+                paddingRight: "35px",
+              }}
+            >
+              Contact Us
+            </Link>
           </li>
         </ul>
       </nav>
@@ -99,16 +140,56 @@ function MyNavBar() {
         {/* Changes to dropdown when button is clicked */}
         <ul className="small">
           <li>
-            <a href="/chatbot">Talk to Us!</a>
+            <Link
+              to="/chatbot"
+              style={{
+                textDecoration: "none",
+                color: "#4b5563",
+                fontSize: "20px",
+                paddingRight: "35px",
+              }}
+            >
+              Talk to Us!
+            </Link>
           </li>
           <li>
-            <a href="/book">Book Appointment</a>
+            <Link
+              to="/book"
+              style={{
+                textDecoration: "none",
+                color: "#4b5563",
+                fontSize: "20px",
+                paddingRight: "35px",
+              }}
+            >
+              Book Appointment
+            </Link>
           </li>
           <li>
-            <a href="/cancel">Cancel Appointment</a>
+            <Link
+              to="/cancel"
+              style={{
+                textDecoration: "none",
+                color: "#4b5563",
+                fontSize: "20px",
+                paddingRight: "35px",
+              }}
+            >
+              Cancel Appointment
+            </Link>
           </li>
           <li>
-            <a href="/contact">Contact Us</a>
+            <Link
+              to="/contact"
+              style={{
+                textDecoration: "none",
+                color: "#4b5563",
+                fontSize: "20px",
+                paddingRight: "35px",
+              }}
+            >
+              Contact Us
+            </Link>
           </li>
         </ul>
         <div className="loginWrapperSmall">
@@ -123,7 +204,12 @@ function MyNavBar() {
             </button>
           ) : (
             <button className="loginButtonSmall">
-              <a href="/login">Login</a>
+              <Link
+                to="/login"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                Login
+              </Link>
             </button>
           )}
         </div>

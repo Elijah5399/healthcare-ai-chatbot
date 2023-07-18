@@ -18,11 +18,10 @@ function App() {
 
   return (
     <div className="app">
-      <div className="nav">
-        <MyNavBar />
-      </div>
-
       <BrowserRouter>
+        <div className="nav">
+          <MyNavBar />
+        </div>
         <div className="pages">
           <Routes>
             <Route path="/" element={<Homepage />} />
