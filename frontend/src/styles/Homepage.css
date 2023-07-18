@@ -13,7 +13,6 @@
 }
 
 .heart {
-  border: 4px;
   border-image: linear-gradient(45deg, #ff4d4d, #ff99cc);
   background: linear-gradient(45deg, #ff4d4d, #ff99cc);
   background-clip: text;
