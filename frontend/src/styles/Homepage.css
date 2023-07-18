@@ -46,7 +46,7 @@ img.vivian {
   border-radius: 50%;
 }
 
-button {
+.chatbotLink {
   height: 50px;
   width: 250px;
   border-radius: 50px;
@@ -59,7 +59,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.chatbotLink:hover {
   background-color: #16a34a;
   cursor: pointer;
 }

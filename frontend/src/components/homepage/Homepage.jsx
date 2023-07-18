@@ -1,6 +1,7 @@
 import "../../styles/Homepage.css";
 import Banner from "./Banner";
 import Vivian from "../../images/Vivian.png";
+import { Link } from "react-router-dom";
 
 export default function Homepage() {
   return (
@@ -27,9 +28,12 @@ export default function Homepage() {
               </h4>
             </div>
             <div className="buttons">
-              <a href="/chatbot">
-                <button> Talk to SGH's 24h Chatbot! </button>
-              </a>
+              <Link to="/chatbot">
+                <button class="chatbotLink">
+                  {" "}
+                  Talk to SGH's 24h Chatbot!{" "}
+                </button>
+              </Link>
             </div>
           </div>
 

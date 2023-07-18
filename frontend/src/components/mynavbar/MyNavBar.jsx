@@ -60,54 +60,22 @@ function MyNavBar() {
         </div>
         <ul className="large">
           <li>
-            <Link
-              to="/chatbot"
-              style={{
-                textDecoration: "none",
-                color: "#4b5563",
-                fontSize: "20px",
-                paddingRight: "35px",
-              }}
-            >
+            <Link to="/chatbot" className="navLink">
               Talk to Us!
             </Link>
           </li>
           <li>
-            <Link
-              to="/book"
-              style={{
-                textDecoration: "none",
-                color: "#4b5563",
-                fontSize: "20px",
-                paddingRight: "35px",
-              }}
-            >
+            <Link to="/book" className="navLink">
               Book Appointment
             </Link>
           </li>
           <li>
-            <Link
-              to="/cancel"
-              style={{
-                textDecoration: "none",
-                color: "#4b5563",
-                fontSize: "20px",
-                paddingRight: "35px",
-              }}
-            >
+            <Link to="/cancel" className="navLink">
               Cancel Appointment
             </Link>
           </li>
           <li>
-            <Link
-              to="/contact"
-              style={{
-                textDecoration: "none",
-                color: "#4b5563",
-                fontSize: "20px",
-                paddingRight: "35px",
-              }}
-            >
+            <Link to="/contact" className="navLink">
               Contact Us
             </Link>
           </li>
@@ -140,54 +108,22 @@ function MyNavBar() {
         {/* Changes to dropdown when button is clicked */}
         <ul className="small">
           <li>
-            <Link
-              to="/chatbot"
-              style={{
-                textDecoration: "none",
-                color: "#4b5563",
-                fontSize: "20px",
-                paddingRight: "35px",
-              }}
-            >
+            <Link to="/chatbot" className="navLink">
               Talk to Us!
             </Link>
           </li>
           <li>
-            <Link
-              to="/book"
-              style={{
-                textDecoration: "none",
-                color: "#4b5563",
-                fontSize: "20px",
-                paddingRight: "35px",
-              }}
-            >
+            <Link to="/book" className="navLink">
               Book Appointment
             </Link>
           </li>
           <li>
-            <Link
-              to="/cancel"
-              style={{
-                textDecoration: "none",
-                color: "#4b5563",
-                fontSize: "20px",
-                paddingRight: "35px",
-              }}
-            >
+            <Link to="/cancel" className="navLink">
               Cancel Appointment
             </Link>
           </li>
           <li>
-            <Link
-              to="/contact"
-              style={{
-                textDecoration: "none",
-                color: "#4b5563",
-                fontSize: "20px",
-                paddingRight: "35px",
-              }}
-            >
+            <Link to="/contact" className="navLink">
               Contact Us
             </Link>
           </li>

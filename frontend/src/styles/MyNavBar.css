@@ -58,13 +58,20 @@ nav {
 ul {
   list-style: none;
 }
+
 ul.large {
   display: flex;
   flex-direction: row;
   padding-top: 15px;
 }
+.navLink {
+  text-decoration: none;
+  color: #4b5563;
+  font-size: 20px;
+  padding-right: 35px;
+}
 
-li > a:hover {
+.navLink:hover {
   color: #1f2937;
 }
 .hamburgerIcon {
@@ -95,7 +102,7 @@ li > a:hover {
   background-color: #16a34a;
 }
 .logoutIconWrapperLarge > p {
-  margin-top: 12px;
+  margin-top: 13px;
   margin-right: 10px;
   font-size: inherit;
 }
@@ -155,7 +162,7 @@ li > a:hover {
     background-color: #16a34a;
   }
   .logoutIconWrapperSmall > p {
-    margin-top: 12px;
+    margin-top: 13px;
     margin-right: 10px;
     font-size: inherit;
   }
