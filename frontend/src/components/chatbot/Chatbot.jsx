@@ -2,6 +2,7 @@ import "../../styles/Chatbot.css";
 import ChatbotLogo from "../../images/chatbot-logo.png";
 import { useState } from "react";
 import userIcon from "../../images/profileIcon2.jpeg";
+import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
 
 export default function Chatbot() {
   {
@@ -14,6 +15,9 @@ export default function Chatbot() {
   ]);
 
   const [input, setInput] = useState("");
+  const { globalState } = useAuthenticationContext();
+  const name = localStorage.name;
+  const token = localStorage.token;
 
   const handleKeyDown = async (e) => {
     if (e.key === "Enter") {
@@ -23,24 +27,44 @@ export default function Chatbot() {
         ...prevMessages,
         { status: "sent", content: input },
       ]);
-      //console.log("input is: " + input);
+
       setInput("");
-      var reply = await fetch(
-        `/bot/query?${new URLSearchParams({
-          input: input,
-        })}`
-      );
+      // var reply = await fetch(
+      //   `/bot/query?${new URLSearchParams({
+      //     input: input,
+      //   })}`
+      // );
+      var reply = await fetch("/bot/query", {
+        method: "POST",
+        body: JSON.stringify({ input, token, name }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       var json = await reply.json();
-      var answer = json.answer;
+      var intent = json.reply.intent;
+      var answer = json.reply.answer;
       if (!answer) {
         answer = "I didn't understand that. Could you rephrase?";
+      } else if (intent === "booking" || intent === "cancelling") {
+        if (!globalState) {
+          answer =
+            "Please login first by clicking on the login button on the top right hand corner of the page";
+        }
+      } else if (intent === "date") {
+        if (!globalState) {
+          answer =
+            "Please login first by clicking on the login button on the top right hand corner of the page";
+        } else {
+          console.log(json.responseData.url);
+          window.location.href = json.responseData.url;
+        }
       }
+
       setMessages((prevMessages) => [
         ...prevMessages,
         { status: "received", content: answer },
       ]);
-
-      //console.log("reply is: " + json.answer);
     }
   };
   const handleChange = (e) => {

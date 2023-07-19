@@ -49,16 +49,6 @@ export default function Booking() {
     const dateTimeString = `${date} ${time}`;
     const epochValue = new Date(dateTimeString).getTime();
 
-    /* Testing */
-    // const response = await fetch("/book/submit", {
-    //   method: "POST",
-    //   body: JSON.stringify({epochValue}),
-    //   headers: {
-    //       "Content-Type": "application/json",
-    //       "Authorization": `Bearer ${globalState.token}`
-    //   }
-    // })
-
     setSubmitted(true);
 
     /* submitting a POST request */
