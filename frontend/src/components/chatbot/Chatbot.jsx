@@ -56,8 +56,10 @@ export default function Chatbot() {
           answer =
             "Please login first by clicking on the login button on the top right hand corner of the page";
         } else {
-          console.log(json.responseData.url);
-          window.location.href = json.responseData.url;
+          if (!json.invalid) {
+            console.log(json.responseData.url);
+            window.location.href = json.responseData.url;
+          }
         }
       }
 

@@ -33,12 +33,25 @@ router.post("/query", async (req, res) => {
   const combinedData = {
     reply: reply,
     responseData: null,
+    invalid: false,
   };
 
   if (reply.intent === "date") {
     const dateTimeArray = userInput.split(" ");
     const date = dateTimeArray[0];
     const time = dateTimeArray[1];
+
+    const dateTimeString = `${date} ${time}`;
+    const epochValue = new Date(dateTimeString).getTime();
+
+    const currTemp = new Date();
+    const currDate = currTemp.getTime();
+    const minDiff = 86400000;
+
+    if (epochValue - currDate < minDiff) {
+      combinedData.reply.answer = "Please ensure that your booking is at least 24h past the current time and the date provided is not in the past.";
+      combinedData.invalid = true;
+    }
 
     const response = await axios.post(
       "http://localhost:3000/payment/create-checkout-session",
@@ -76,6 +89,11 @@ manager.addDocument("en", "i would like to make a booking", "booking");
 manager.addDocument("en", "how can i make a booking?", "booking");
 manager.addDocument("en", "book an appointment", "booking");
 manager.addDocument("en", "i want an appointment", "booking");
+manager.addDocument("en", "book for me", "booking.request");
+manager.addDocument("en", "help me book", "booking.request");
+manager.addDocument("en", "i would like you to book for me", "booking.request");
+manager.addDocument("en", "second option", "booking.request");
+manager.addDocument("en", "do it for me", "booking.request");
 
 // Cancellation
 manager.addDocument("en", "i would like to cancel an appointment", "cancelling");
@@ -92,9 +110,29 @@ manager.addDocument("en", "what are your opening hours?", "contact.open");
 manager.addDocument("en", "when can i visit?", "contact.open");
 manager.addDocument("en", "what are your visiting hours?", "contact.open");
 
+// Feedback
+manager.addDocument("en", "i would like to provide feedback", "feedback");
+manager.addDocument("en", "give feedback", "feedback");
+manager.addDocument("en", "improvements", "feedback");
+manager.addDocument("en", "feedback", "feedback");
+manager.addDocument("en", "your website can be improved", "feedback");
+manager.addDocument("en", "the hospital queues are too long", "feedback");
+manager.addDocument("en", "the bookings and cancellations can be made easier", "feedback");
+manager.addDocument("en", "the chatbot can be more responsive", "feedback");
+
 // Date
-manager.addDocument("en", "2023-1-1 14:43", "date");
+manager.addDocument("en", "2023-1-1 01:00", "date");
+manager.addDocument("en", "2023-2-26 02:00", "date");
+manager.addDocument("en", "2023-3-10 03:30", "date");
+manager.addDocument("en", "2023-3-31 10:00", "date");
+manager.addDocument("en", "2023-4-27 14:43", "date");
+manager.addDocument("en", "2023-5-2 21:43", "date");
 manager.addDocument("en", "2024-6-12 03:39", "date");
+manager.addDocument("en", "2024-1-1 01:00", "date");
+manager.addDocument("en", "2024-2-26 02:00", "date");
+manager.addDocument("en", "2025-3-10 03:30", "date");
+manager.addDocument("en", "2025-3-31 10:00", "date");
+manager.addDocument("en", "2025-4-27 14:43", "date");
 
 // Answers
 manager.addAnswer("en", "greetings.hello", "Hey there!");
@@ -102,13 +140,16 @@ manager.addAnswer("en", "greetings.hello", "Greetings!");
 manager.addAnswer("en", "greetings.bye", "Goodbye!");
 manager.addAnswer("en", "greetings.bye", "See you soon!");
 
-manager.addAnswer("en", "booking", "There are 2 ways to make a booking. First, you can click the Bookings tab to book an appointment! Second, you can send me a date and time and I will do it for you! Please send it to me in YYYY-MM-DD and HH:MM (24h clock) format.")
+manager.addAnswer("en", "booking", "There are 2 ways to make a booking. First, you can click the Bookings tab to book an appointment! Second, you can send me a date and time and I will do it for you!")
+manager.addAnswer("en", "booking.request", "Please respond with your desired appointment in YYYY-MM-DD and HH:MM (24h clock) format. Please note that you will immediately be redirected to the payment page.")
 
 manager.addAnswer("en", "cancelling", "Click the Cancel tab to cancel an appointment!")
 
 manager.addAnswer("en", "contact.location", "We are located at Outram Road, Singapore 169608. You can check out our contact information under the Contacts tab to find out more!")
 manager.addAnswer("en", "contact.number", "For general enquiries, please call (+65) 6222 3322 (24h). For feedback, please call (+65) 6326 5350 (Mon to Fri : 9am to 5pm). You can check out our contact information under the Contacts tab to find out more!")
 manager.addAnswer("en", "contact.open", "We are open 24h and our visiting times are 12:00pm to 2:00pm and 5:00pm to 8:30pm. You can check out our contact information under the Contacts tab to find out more!")
+
+manager.addAnswer("en", "feedback", "Thank you for your feedback! We will work on it promptly.")
 
 manager.addAnswer("en", "date", "Redirecting to payment page.")
 
