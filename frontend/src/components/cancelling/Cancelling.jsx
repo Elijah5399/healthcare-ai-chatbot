@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useAppointmentsContext } from "../../context/AppointmentsContext";
 import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
+import { Navigate } from "react-router-dom";
 
 export default function Cancelling() {
   const { appts, dispatch } = useAppointmentsContext();
@@ -27,27 +28,6 @@ export default function Cancelling() {
       fetchAppts();
     }
   }, [dispatch, globalState]);
-
-  useEffect(() => {
-    if (localStorage.name && localStorage.token) {
-      const token = localStorage.getItem("token");
-      fetch("/user/verify", {
-        method: "POST",
-        body: JSON.stringify({ token: token }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        if (res.status === 200) {
-          // do nothing
-        } else {
-          window.location.href = "/login";
-        }
-      });
-    } else {
-      window.location.href = "/login";
-    }
-  });
 
   function AppointmentDetails({ appt }) {
     const { dispatch } = useAppointmentsContext();
@@ -93,7 +73,24 @@ export default function Cancelling() {
       </div>
     );
   }
-
+  if (localStorage.name && localStorage.token) {
+    const token = localStorage.getItem("token");
+    fetch("/user/verify", {
+      method: "POST",
+      body: JSON.stringify({ token: token }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        // do nothing
+      } else {
+        return <Navigate replace to="/login" />;
+      }
+    });
+  } else {
+    return <Navigate replace to="/login" />;
+  }
   return (
     <div className="cancellingpageWrapper">
       <div className="cancellingpageText">

@@ -18,10 +18,6 @@
   color: #4f4f4f;
 }
 
-.logoutIcon:hover {
-  color: #f83535;
-}
-
 .loginButton {
   position: absolute;
   top: 18px;
@@ -58,18 +54,20 @@ nav {
 ul {
   list-style: none;
 }
+
 ul.large {
   display: flex;
   flex-direction: row;
   padding-top: 15px;
 }
-li > a {
+.navLink {
   text-decoration: none;
   color: #4b5563;
   font-size: 20px;
   padding-right: 35px;
 }
-li > a:hover {
+
+.navLink:hover {
   color: #1f2937;
 }
 .hamburgerIcon {
@@ -100,7 +98,7 @@ li > a:hover {
   background-color: #16a34a;
 }
 .logoutIconWrapperLarge > p {
-  margin-top: 12px;
+  margin-top: 13px;
   margin-right: 10px;
   font-size: inherit;
 }
@@ -145,10 +143,6 @@ li > a:hover {
     height: 50px;
     font-size: 20px;
   }
-  .loginButtonSmall > a {
-    text-decoration: none;
-    color: inherit;
-  }
   .logoutIconWrapperSmall {
     display: flex;
     align-items: center;
@@ -164,8 +158,12 @@ li > a:hover {
     background-color: #16a34a;
   }
   .logoutIconWrapperSmall > p {
-    margin-top: 12px;
+    margin-top: 13px;
     margin-right: 10px;
     font-size: inherit;
+  }
+  #hamburgerbutton {
+    background: none;
+    border: none;
   }
 }

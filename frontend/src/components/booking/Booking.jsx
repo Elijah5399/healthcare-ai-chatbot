@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
+import { Navigate } from "react-router-dom";
 
 export default function Booking() {
   const [submitted, setSubmitted] = useState(false);
@@ -11,26 +12,6 @@ export default function Booking() {
   const [error, setError] = useState("null");
   const { globalState } = useAuthenticationContext();
 
-  useEffect(() => {
-    if (localStorage.name && localStorage.token) {
-      const token = localStorage.getItem("token");
-      fetch("/user/verify", {
-        method: "POST",
-        body: JSON.stringify({ token: token }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-        if (res.status === 200) {
-          // do nothing
-        } else {
-          window.location.href = "/login";
-        }
-      });
-    } else {
-      window.location.href = "/login";
-    }
-  });
   const handleSubmit = async (e) => {
     if (!globalState) {
       setError("You must be logged in");
@@ -71,6 +52,25 @@ export default function Booking() {
       .required("Date cannot be empty"),
     time: Yup.string().required("Time cannot be empty"),
   });
+
+  if (localStorage.name && localStorage.token) {
+    const token = localStorage.getItem("token");
+    fetch("/user/verify", {
+      method: "POST",
+      body: JSON.stringify({ token: token }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.status === 200) {
+        // do nothing
+      } else {
+        return <Navigate replace to="/login" />;
+      }
+    });
+  } else {
+    return <Navigate replace to="/login" />;
+  }
 
   /* UI for Booking Form */
   function Forms() {

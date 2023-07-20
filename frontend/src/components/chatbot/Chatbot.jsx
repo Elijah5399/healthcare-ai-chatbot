@@ -10,8 +10,8 @@ export default function Chatbot() {
   }
   /* messages is an array of JSON objects. */
   const [messages, setMessages] = useState([
-    { status: "received", content: "Hello Elijah" },
-    { status: "sent", content: "Hello World!" },
+    { status: "received", content: "Hello! How can I help you?" },
+    { status: "sent", content: "Hello!" },
   ]);
 
   const [input, setInput] = useState("");

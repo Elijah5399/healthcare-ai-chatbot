@@ -24,8 +24,8 @@ router.post("/create-checkout-session", async (req, res) => {
       },
     ],
     mode: "payment",
-    success_url: "http://localhost:3000/payment/success",
-    cancel_url: `http://localhost:3000/payment/cancel`,
+    success_url: "http://35.197.150.195:3000/payment/success",
+    cancel_url: `http://35.197.150.195:3000/payment/cancel`,
     metadata: {
       token: `${token}`,
     }, //store the token in the session's metadata
