@@ -5,9 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRightFromBracket,
   faBars,
+  faX,
 } from "@fortawesome/free-solid-svg-icons";
 import { useLogOut } from "../../hooks/useLogOut";
 import { useAuthenticationContext } from "../../hooks/useAuthenticationContext";
+import { Link } from "react-router-dom";
 
 function MyNavBar() {
   const [user, setUser] = useState("");
@@ -53,22 +55,30 @@ function MyNavBar() {
     <div className="navbarWrapper">
       <nav className="container">
         <div>
-          <a href="/">
+          <Link to="/">
             <img className="sghlogo" src={SGHLogo} alt="SGH" />
-          </a>
+          </Link>
         </div>
         <ul className="large">
           <li>
-            <a href="/chatbot">Talk to Us!</a>
+            <Link to="/chatbot" className="navLink">
+              Talk to Us!
+            </Link>
           </li>
           <li>
-            <a href="/book">Book Appointment</a>
+            <Link to="/book" className="navLink">
+              Book Appointment
+            </Link>
           </li>
           <li>
-            <a href="/cancel">Cancel Appointment</a>
+            <Link to="/cancel" className="navLink">
+              Cancel Appointment
+            </Link>
           </li>
           <li>
-            <a href="/contact">Contact Us</a>
+            <Link to="/contact" className="navLink">
+              Contact Us
+            </Link>
           </li>
         </ul>
       </nav>
@@ -83,32 +93,49 @@ function MyNavBar() {
             />
           </button>
         ) : (
-          <button className="loginButton">
-            <a href="/login">Login</a>
-          </button>
+          <Link
+            to="/login"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <button className="loginButton">Login</button>
+          </Link>
         )}
       </div>
 
       {/* below code is for smaller screens */}
       <div className="hamburgerIcon">
-        <button id="hamburgerbutton" onClick={dropdownhandler}>
-          <FontAwesomeIcon icon={faBars} size={"2x"} />
-        </button>
+        {dropdown ? (
+          <button id="hamburgerbutton" onClick={dropdownhandler}>
+            <FontAwesomeIcon icon={faX} size={"2x"} />
+          </button>
+        ) : (
+          <button id="hamburgerbutton" onClick={dropdownhandler}>
+            <FontAwesomeIcon icon={faBars} size={"2x"} />
+          </button>
+        )}
       </div>
       <div className={dropdown ? "dropdown" : "dropdown-hidden"}>
         {/* Changes to dropdown when button is clicked */}
         <ul className="small">
           <li>
-            <a href="/chatbot">Talk to Us!</a>
+            <Link to="/chatbot" className="navLink">
+              Talk to Us!
+            </Link>
           </li>
           <li>
-            <a href="/book">Book Appointment</a>
+            <Link to="/book" className="navLink">
+              Book Appointment
+            </Link>
           </li>
           <li>
-            <a href="/cancel">Cancel Appointment</a>
+            <Link to="/cancel" className="navLink">
+              Cancel Appointment
+            </Link>
           </li>
           <li>
-            <a href="/contact">Contact Us</a>
+            <Link to="/contact" className="navLink">
+              Contact Us
+            </Link>
           </li>
         </ul>
         <div className="loginWrapperSmall">
@@ -122,9 +149,12 @@ function MyNavBar() {
               />
             </button>
           ) : (
-            <button className="loginButtonSmall">
-              <a href="/login">Login</a>
-            </button>
+            <Link
+              to="/login"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <button className="loginButtonSmall">Login</button>
+            </Link>
           )}
         </div>
       </div>

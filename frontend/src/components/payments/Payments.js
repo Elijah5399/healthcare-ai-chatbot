@@ -1,5 +1,6 @@
 import "../../styles/Payment.css";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
 export function PaymentSuccess() {
   return (
@@ -8,7 +9,9 @@ export function PaymentSuccess() {
         Payment has been successfully made. Click the button below to view your
         appointments.
       </h2>
-      <Button href="/cancel">Appointments</Button>
+      <Button>
+        <Link to="/cancel">Appointments</Link>
+      </Button>
     </div>
   );
 }
@@ -20,7 +23,9 @@ export function PaymentCancel() {
         Payment has been cancelled. Click the button below to book an
         appointment.
       </h2>
-      <Button href="/book">Book</Button>
+      <Button>
+        <Link to="/book">Book</Link>
+      </Button>
     </div>
   );
 }
