@@ -94,6 +94,8 @@ manager.addDocument("en", "help me book", "booking.request");
 manager.addDocument("en", "i would like you to book for me", "booking.request");
 manager.addDocument("en", "second option", "booking.request");
 manager.addDocument("en", "do it for me", "booking.request");
+manager.addDocument("en", "i want the second option", "booking.request");
+manager.addDocument("en", "i want the second one", "booking.request");
 
 // Cancellation
 manager.addDocument("en", "i would like to cancel an appointment", "cancelling");
