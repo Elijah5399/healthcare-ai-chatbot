@@ -3,27 +3,6 @@ const router = express.Router();
 const { NlpManager } = require("node-nlp");
 const axios = require("axios");
 
-// router.get("/query", async (req, res) => {
-//   const userInput = req.query.input;
-//   const name = req.body.name;
-//   const token = req.body.token;
-//   console.log(name + token)
-//   const reply = await ask(userInput);
-
-//   if (reply.entities[5].entity === 'datetime') {
-//     const dateTimeArray = reply.entities[5].utteranceText.split(" ");
-//     const date = dateTimeArray[0];
-//     const time = dateTimeArray[1];
-
-//     console.log(date)
-//     console.log(time)
-
-//     console.log(reply.entities[5].utteranceText);
-//   }
-
-//   res.send(reply);
-// });
-
 router.post("/query", async (req, res) => {
   const userInput = req.body.input;
   const name = req.body.name;
