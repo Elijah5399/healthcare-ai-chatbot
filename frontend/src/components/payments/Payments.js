@@ -10,7 +10,9 @@ export function PaymentSuccess() {
         appointments.
       </h2>
       <Button>
-        <Link to="/cancel">Appointments</Link>
+        <Link to="/cancel" style={{ color: "white", textDecoration: "none" }}>
+          Appointments
+        </Link>
       </Button>
     </div>
   );
@@ -24,7 +26,9 @@ export function PaymentCancel() {
         appointment.
       </h2>
       <Button>
-        <Link to="/book">Book</Link>
+        <Link to="/book" style={{ color: "white", textDecoration: "none" }}>
+          Book
+        </Link>
       </Button>
     </div>
   );
