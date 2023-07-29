@@ -33,7 +33,7 @@ router.post("/query", async (req, res) => {
     }
 
     const response = await axios.post(
-      "http://localhost:3000/payment/create-checkout-session",
+      "http://localhost:3001/payment/create-checkout-session",
       { date, time, token, name },
       {
         headers: {
