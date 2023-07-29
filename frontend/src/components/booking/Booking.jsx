@@ -48,7 +48,7 @@ export default function Booking() {
 
   const apptSchema = Yup.object().shape({
     date: Yup.date()
-      .min(new Date() + 86400000, "Invalid date")
+      .min(new Date(Date.now() + 86400000), "Invalid date")
       .required("Date cannot be empty"),
     time: Yup.string().required("Time cannot be empty"),
   });
